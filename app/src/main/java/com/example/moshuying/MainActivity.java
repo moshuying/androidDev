@@ -31,5 +31,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(startMyAty);
             }
         });
+
+        findViewById(R.id.btnStartMyAty2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //toStartAnotherActivity 作为参数用于创建隐式Intent，以启动活动HideIntent
+                startActivity(new Intent("toStartAnotherActivity"));
+            }
+        });
     }
 }

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Android_D_P_T_Press</string>
+    <string name="activity">启动另一个activity</string>
+    <string name="myaty">启动MyAty</string>
+</resources>

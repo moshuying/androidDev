@@ -2,12 +2,19 @@ package com.example.moshuying;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.example.moshuying.lib.PlatformUtil;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static PlatformUtil Platformutil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         btnStartAnother.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,MainActivity2.class));
+                startActivity(new Intent(MainActivity.this, BtnStartAnother.class));
             }
         });
 
@@ -39,5 +46,42 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent("toStartAnotherActivity"));
             }
         });
+
+        findViewById(R.id.btnStartAnotherApplicationActivity).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shareQQ(MainActivity.this,"分享moshuying的纯文本到qq");
+            }
+        });
+        findViewById(R.id.openShare).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,Share.class));
+            }
+        });
+        findViewById(R.id.usePreOperation).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,PredefinedOperation.class));
+            }
+        });
+    }
+    /**
+     * 直接分享纯文本内容至QQ好友
+     * @param mContext
+     * @param content
+     */
+    public static void shareQQ(Context mContext, String content) {
+        if (PlatformUtil.isInstalledSpecifiedApp(mContext,PlatformUtil.PACKAGE_QQ)) {
+            Intent intent = new Intent("android.intent.action.SEND");
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
+            intent.putExtra(Intent.EXTRA_TEXT, content);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setComponent(new ComponentName("com.tencent.mobileqq", "com.tencent.mobileqq.activity.JumpActivity"));
+            mContext.startActivity(intent);
+        } else {
+            Toast.makeText(mContext, "您需要安装QQ客户端", Toast.LENGTH_LONG).show();
+        }
     }
 }

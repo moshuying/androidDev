@@ -74,7 +74,7 @@ public class Resource {
         File shareFile = null;
         try {
             open = assetManager.open(fileName);
-            String saveFilePath = Environment.getExternalStorageState()+"/android/data/"+mContext.getPackageName()+"/shareFile/";
+            String saveFilePath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/android/data/"+mContext.getPackageName()+"/shareFile/";
             File file = new File(saveFilePath);
             if (!file.exists()){
                 System.out.println(file.mkdirs()+":end");

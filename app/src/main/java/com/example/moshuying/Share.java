@@ -72,7 +72,7 @@ public class Share extends AppCompatActivity {
             public void onItemClick(View view, int position) {
                 switch (datas.get(position)) {
                     case "微信好友-文本":
-                        nativeShareTool.shareWechatFriend("测试信息，记得常去访问moshuying.top哦~·");
+                        nativeShareTool.shareWechatFriend("测试信息，记得常去访问 www.moshuying.top 哦~·");
                         break;
                     case "微信好友-图片":
                         nativeShareTool.shareWechatFriend(Resource.getInstance(mContext).getPicFile(),true);

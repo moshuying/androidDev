@@ -19,7 +19,7 @@ import java.io.IOException;
 
 public class ShareToolUtil {
 
-    public static final String AUTHORITY = "com.example.fileprovider";
+    public static final String AUTHORITY = "com.example.moshuying.fileprovider";
     private static String sharePicName = "pixiv_yuanshen.jpg";
     private static String sharePicPath = Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator+"intentShare"+ File.separator+"pixivyuanshen"+ File.separator;
     public static final int REQUEST_PERMISSION_CODE  = 15;

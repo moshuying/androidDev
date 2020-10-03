@@ -8,6 +8,7 @@
 
     <Button
         android:id="@+id/openBrowser"
+        style="@style/Widget.AppCompat.Button"
         android:layout_width="386dp"
         android:layout_height="53dp"
         android:layout_marginTop="15dp"

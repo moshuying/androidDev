@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
-    <paths>
-        <external-path path="" name="myFile"></external-path>
-    </paths>
-<!--    <external-path path="Android/data/com.example.moshuying/" name="files_root" />-->
+    <external-path path="" name="myFile"></external-path>
+    <!--    <external-path path="Android/data/com.example.moshuying/" name="files_root" />-->
 <!--    <root-path-->
 <!--        name="ext_sd_files"-->
 <!--        path="" />-->

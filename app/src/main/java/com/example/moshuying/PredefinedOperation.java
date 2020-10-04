@@ -20,7 +20,9 @@ public class PredefinedOperation extends AppCompatActivity {
             public void onClick(View v) {
                 // 使用隐式Intent打开浏览器
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("https://moshuying.top"));
+                EditText text = (EditText) findViewById(R.id.text);
+                EditText time = (EditText) findViewById(R.id.time);
+                intent.setData(Uri.parse("https://threelib.moshuying.top/assets/AndroidActive.html?time="+time.getText()+"&title=跳转到墨抒颖家&text="+text.getText()));
                 startActivity(intent);
             }
         });

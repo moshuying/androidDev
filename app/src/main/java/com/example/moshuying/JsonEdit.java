@@ -31,5 +31,20 @@ public class JsonEdit extends AppCompatActivity {
                 finish();
             }
         });
+
+        findViewById(R.id.sendBundle).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(JsonEdit.this,Auto.class);
+                Bundle bd = new Bundle();
+                TextView stringKey = findViewById(R.id.bundleKeyString);
+                String string = stringKey.getText().toString();
+                bd.putString("String",string);
+                TextView stringArray = findViewById(R.id.stringArray);
+                bd.putStringArray("StringArray",stringArray.getText().toString().split(","));
+                intent.putExtras(bd);
+                startActivity(intent);
+            }
+        });
     }
 }

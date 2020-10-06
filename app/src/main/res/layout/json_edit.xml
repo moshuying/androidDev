@@ -6,6 +6,18 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:text="StringArray"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/stringArray"
+        app:layout_constraintEnd_toStartOf="@+id/stringArray"
+        app:layout_constraintTop_toTopOf="@+id/stringArray" />
+
+    <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,11 +42,11 @@
         android:id="@+id/json_edit_back"
         android:layout_width="386dp"
         android:layout_height="53dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="15dp"
         android:text="返回"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sendJson" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editTextTextMultiLine"
@@ -47,5 +59,55 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/bundleKeyString"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="moshuying"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sendJson" />
+
+    <EditText
+        android:id="@+id/stringArray"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="mo,shu,ying"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bundleKeyString" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:text="String"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/bundleKeyString"
+        app:layout_constraintEnd_toStartOf="@+id/bundleKeyString"
+        app:layout_constraintTop_toTopOf="@+id/bundleKeyString" />
+
+    <Button
+        android:id="@+id/sendBundle"
+        android:layout_width="386dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="15dp"
+        android:text="传递Bundle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stringArray" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

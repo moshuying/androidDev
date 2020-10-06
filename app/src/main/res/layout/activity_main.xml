@@ -69,13 +69,24 @@
         app:layout_constraintTop_toBottomOf="@+id/btnStartAnotherApplicationActivity" />
 
     <Button
-        android:id="@+id/usePreOperation"
-        android:text="使用Android预定义操作"
+        android:id="@+id/jsonEdit"
         android:layout_width="392dp"
         android:layout_height="49dp"
         android:layout_marginTop="20dp"
+        android:text="在活动中传递数据"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usePreOperation" />
+
+    <Button
+        android:id="@+id/usePreOperation"
+        android:layout_width="392dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="20dp"
+        android:text="使用Android预定义操作"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/openShare"/>
+        app:layout_constraintTop_toBottomOf="@+id/openShare" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

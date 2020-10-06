@@ -53,16 +53,25 @@ public class MainActivity extends AppCompatActivity {
                 shareQQ(MainActivity.this,"分享moshuying的纯文本到qq");
             }
         });
+
         findViewById(R.id.openShare).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,Share.class));
             }
         });
+
         findViewById(R.id.usePreOperation).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,PredefinedOperation.class));
+            }
+        });
+
+        findViewById(R.id.jsonEdit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,JsonEdit.class));
             }
         });
     }

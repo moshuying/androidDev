@@ -25,6 +25,8 @@
         <activity android:name=".MyAty" />
         <activity android:name=".Share" />
         <activity android:name=".PredefinedOperation" />
+        <activity android:name=".JsonEdit" />
+        <activity android:name=".Auto" />
         <!--在AndroidManifest.xml中声明活动时候,在其Intent过滤器中可使用任意字符串作为活动的操作名称。-->
         <activity android:name=".HideIntent">
             <intent-filter>

@@ -1,11 +1,15 @@
 package com.example.moshuying;
 
+import android.content.ContentUris;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -57,21 +61,32 @@ public class PredefinedOperation extends AppCompatActivity {
                          */
                         .putExtra(ContactsContract.Intents.Insert.PHONE_TYPE,
                                 ContactsContract.CommonDataKinds.Phone.TYPE_WORK)
-                        .putExtra(ContactsContract.Intents.Insert.PHONETIC_NAME,name.getText());
+                        .putExtra(android.provider.ContactsContract.Intents.Insert.NAME
+                                ,name.getText());
 
 //                intent.setData(Uri.parse("content://contacts/people/1"));
                 startActivity(intent);
             }
         });
-
         findViewById(R.id.callContacts).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 使用隐式Intent打开拨打电话节面
+                // 使用隐式Intent打开拨打电话界面
                 Intent intent = new Intent(Intent.ACTION_DIAL);
                 intent.setData(Uri.parse("tel:110"));
                 startActivity(intent);
             }
         });
+        findViewById(R.id.openCall).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_INSERT);
+                intent.setType("vnd.android.cursor.dir/person");
+                intent.setType("vnd.android.cursor.dir/contact");
+                intent.setType("vnd.android.cursor.dir/raw_contact");
+                startActivity(intent);
+            }
+        });
+
     }
 }

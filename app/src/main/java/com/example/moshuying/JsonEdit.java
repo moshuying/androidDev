@@ -15,12 +15,53 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.io.Serializable;
 
 public class JsonEdit extends AppCompatActivity {
+    private static final String packageName = "com.example.moshuying";
+    private static final String className = "JsonEdit";
+
+    private static void printState(){
+        StackTraceElement[] stes = Thread.currentThread().getStackTrace();
+        for (StackTraceElement ste : stes) {
+            if ((ste.getClassName().equals(packageName+"."+className)) && (!ste.getMethodName().equals("printState"))) {
+                System.out.println("正在执行" + ste.getClassName().replace(packageName+".","") + "." + ste.getMethodName()+"()");
+            }
+        }
+    }
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        printState();
+    }
+    @Override
+    protected void onStart(){
+        super.onStart();
+        printState();
+    }
+    @Override
+    protected void onStop(){
+        super.onStop();
+        printState();
+    }
+    @Override
+    protected void onPause(){
+        super.onPause();
+        printState();
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        printState();
+    }
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        printState();
+    }
     private static final int REQUEST_CODE = 1004;//标识当前活动的请求
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.json_edit);
-
+        printState();
         findViewById(R.id.simpleData).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,11 +147,11 @@ public class JsonEdit extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode,int resultCode,Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        System.out.println(data.getStringExtra("data"));
+        printState();
         if(requestCode == REQUEST_CODE){ // 返回的请求码与当前活动请求码一致时，才执行后继操作
             if(resultCode == RESULT_OK){ // RESULT_OK表示返回的活动已成功处理请求
-                Button button = findViewById(R.id.getActivityBackData);
-                button.setText("从另一个Activity获取到返回值："+data.getStringExtra("data"));
+                TextView textView = findViewById(R.id.showActivityBackData);
+                textView.setText("从另一个Activity获取到返回值："+data.getStringExtra("data"));
             }
         }
     }

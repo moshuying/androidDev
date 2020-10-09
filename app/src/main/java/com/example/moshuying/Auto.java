@@ -22,11 +22,52 @@ import java.util.Map;
 public class Auto extends AppCompatActivity {
     public LinearLayout linearLayout;
     public Intent intent;
+    private static final String packageName = "com.example.moshuying";
+    private static final String className = "Auto";
 
+    private static void printState(){
+        StackTraceElement[] stes = Thread.currentThread().getStackTrace();
+        for (StackTraceElement ste : stes) {
+            if ((ste.getClassName().equals(packageName+"."+className)) && (!ste.getMethodName().equals("printState"))) {
+                System.out.println("正在执行" + ste.getClassName().replace(packageName+".","") + "." + ste.getMethodName()+"()");
+            }
+        }
+    }
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        printState();
+    }
+    @Override
+    protected void onStart(){
+        super.onStart();
+        printState();
+    }
+    @Override
+    protected void onStop(){
+        super.onStop();
+        printState();
+    }
+    @Override
+    protected void onPause(){
+        super.onPause();
+        printState();
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        printState();
+    }
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        printState();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState){
-        Boolean AddBack = true;
         super.onCreate(savedInstanceState);
+        Boolean AddBack = true;
+        printState();
         setContentView(R.layout.auto);
         linearLayout = findViewById(R.id.auto_list_item);
         linearLayout.setOrientation(LinearLayout.VERTICAL);

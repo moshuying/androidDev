@@ -365,13 +365,12 @@
             android:id="@+id/json_edit_back"
             android:layout_width="386dp"
             android:layout_height="53dp"
-            android:layout_marginTop="30dp"
             android:layout_marginBottom="15dp"
             android:text="返回"
             app:layout_constraintBottom_toTopOf="@+id/textView3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/getActivityBackData" />
+            app:layout_constraintTop_toBottomOf="@+id/showActivityBackData" />
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
@@ -382,4 +381,17 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/showActivityBackData"
+            android:layout_width="wrap_content"
+            android:layout_height="23dp"
+            android:layout_marginEnd="270dp"
+            android:layout_marginRight="270dp"
+            android:text="尚未从另一个ativity获取到返回值"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/getActivityBackData"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/getActivityBackData"
+            app:layout_constraintTop_toBottomOf="@+id/getActivityBackData" />
 </androidx.constraintlayout.widget.ConstraintLayout>

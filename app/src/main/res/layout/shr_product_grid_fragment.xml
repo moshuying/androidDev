@@ -7,17 +7,21 @@
     android:clipChildren="false"
     android:clipToPadding="false"
     tools:context=".ProductGridFragment">
-
-    <LinearLayout
-        style="@style/Widget.Shrine.Backdrop"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:paddingTop="88dp">
-
-        <include layout="@layout/shr_backdrop" />
-    </LinearLayout>
+        android:scrollbars="vertical"
+        android:fadingEdge="vertical">
+        <LinearLayout
+            style="@style/Widget.Shrine.Backdrop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingTop="88dp">
+            <include layout="@layout/shr_backdrop" />
+        </LinearLayout>
+    </ScrollView>
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"

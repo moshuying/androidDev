@@ -106,7 +106,6 @@ public class ProductEntry {
 
 class HttpGetRequest implements Callable<String> {
     public String url = null;
-    /** 模拟线程执行完毕后主程序要获取的值*/
     @Override
     public String call() {
         String returnValue = null;

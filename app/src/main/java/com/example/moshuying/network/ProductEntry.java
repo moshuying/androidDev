@@ -27,9 +27,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
+
+import static okhttp3.MediaType.*;
 
 /**
  * A product entry in the list of products.
@@ -78,14 +82,14 @@ public class ProductEntry {
 //        String jsonProductsString = writer.toString();//
         String jsonProductsString = sendByOKHttp();
         Gson gson = new Gson();
-        Type productListType = new TypeToken<ArrayList<ProductEntry>>() {
-        }.getType();
+        Type productListType = new TypeToken<ArrayList<ProductEntry>>(){}.getType();
         return gson.fromJson(jsonProductsString, productListType);
     }
     public static String sendByOKHttp() {
-        MyThreadReturn runnable =  new MyThreadReturn();
         ExecutorService executorService = Executors.newCachedThreadPool();
-        Future<String> submit = executorService.submit(new MyThreadReturn());
+        HttpGetRequest httpGetRequest = new HttpGetRequest();
+        httpGetRequest.url = "https://exampleapp.moshuying.top/node_api/product_list";
+        Future<String> submit = executorService.submit(httpGetRequest);
         String data = "";
         try {
             data = submit.get();
@@ -100,16 +104,38 @@ public class ProductEntry {
     }
 }
 
-class MyThreadReturn implements Callable<String> {
+class HttpGetRequest implements Callable<String> {
+    public String url = null;
     /** 模拟线程执行完毕后主程序要获取的值*/
     @Override
     public String call() {
-        String returnValue = "";
+        String returnValue = null;
         OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url("https://exampleapp.moshuying.top/node_api/product_list").build();
+        Request request = new Request.Builder().url(url).build();
         Response response = null;
         try {
             response = client.newCall(request).execute();//发送请求
+            returnValue = response.body().string();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return returnValue;
+    }
+}
+
+class HttpPostRequest implements Callable<String>{
+    public String url = null;
+    public String json = null;
+    public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
+    @Override
+    public String call(){
+        String returnValue = null;
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = RequestBody.create(json, JSON);
+        Request request = new Request.Builder().url(url).post(body).build();
+        Response response = null;
+        try {
+            response = client.newCall(request).execute();
             returnValue = response.body().string();
         } catch (IOException e) {
             e.printStackTrace();

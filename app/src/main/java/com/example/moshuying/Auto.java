@@ -1,9 +1,12 @@
 package com.example.moshuying;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.util.Linkify;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,26 +20,66 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Auto extends AppCompatActivity {
+    public LinearLayout linearLayout;
+    public Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
+        Boolean AddBack = true;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.auto);
-        LinearLayout layout = findViewById(R.id.auto_list_item);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        Intent intent = getIntent();
-
-        if(null != intent.getStringExtra("data") && !intent.getStringExtra("data").equals("")){
-            addTitle(layout,"获取到的数据类型是JSON");
-            jsonHandle(layout,intent);
-        }else{
-            addTitle(layout,"获取到的数据类型是Bundle");
-            BundleHandle(layout,intent);
+        linearLayout = findViewById(R.id.auto_list_item);
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+        intent = getIntent();
+        switch (intent.getStringExtra("type")){
+            case "callback": setCallback();AddBack=false; break;
+            case "Simple":SimpleHandle(); break;
+            case "Parcelable":ParcelableHandle();break;
+            case "Serializable":SerializableHandle(); break;
+            case "Bundle":BundleHandle(); break;
+            case "Json":jsonHandle();break;
+            default: addTitle("未接受到任何数据");break;
         }
 
-        addBack(layout);
+        if(AddBack){addBack();}
     }
+    protected void setCallback(){
+        final EditText editText = new EditText(this);
+        editText.setText("这里填入活动返回的值");
+        linearLayout.addView(editText);
 
-    protected void BundleHandle(LinearLayout layout,Intent intent){
+        Button button = new Button(this);
+        button.setText("输入完成");
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent resintent = new Intent();
+                resintent.putExtra("data",editText.getText().toString());
+                setResult(RESULT_OK,resintent);
+                finish();
+            }
+        });
+        linearLayout.addView(button);
+    }
+    protected void SerializableHandle(){
+        addTitle("获取到的数据类型是Serializable");
+        User user = (User) intent.getSerializableExtra("user");
+        create("name",user.getName());
+        create("age",String.valueOf(user.getAge()));
+    }
+    protected void ParcelableHandle(){
+        addTitle("获取到的数据类型是Parcelable");
+        User2 user2 = intent.getParcelableExtra("user2");
+        create("name",user2.getName());
+        create("age",String.valueOf(user2.getAge()));
+    }
+    protected void SimpleHandle(){
+        addTitle("获取到的数据类型是简单数据类型");
+        create("simpleDataKey1",intent.getStringExtra("simpleDataKey1"));
+        create("simpleDataKey2",intent.getStringExtra("simpleDataKey2"));
+    }
+    protected void BundleHandle(){
+        addTitle("获取到的数据类型是Bundle");
         Bundle bd = intent.getExtras();
         String string = bd.getString("String");
 
@@ -45,27 +88,19 @@ public class Auto extends AppCompatActivity {
         textView.setText(string);
         textView.setTextSize(22);
         textView.setWidth(358);
-        layout.addView(textView);
+        linearLayout.addView(textView);
 
         final String[] stringArray = bd.getStringArray("StringArray");
         System.out.println(stringArray.toString());
         for(int i = 0,l=stringArray.length;i<l;i++){
-            Button autoButton = new Button(this);
-            autoButton.setText(stringArray[i]);
-            final int finalI = i;
-            autoButton.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    String str = "你点击了"+stringArray[finalI].toString();
-                    Toast.makeText(Auto.this,str,Toast.LENGTH_LONG).show();
-                }
-            });
-            layout.addView(autoButton);
+            create(stringArray[i],stringArray[i]);
         }
 
     }
 
-    protected void jsonHandle(LinearLayout layout,Intent intent){
+    protected void jsonHandle(){
+        addTitle("获取到的数据类型是JSON");
+
         String data = intent.getStringExtra("data");
 
         // 展示接收到的数据
@@ -73,32 +108,35 @@ public class Auto extends AppCompatActivity {
         textView.setText(data);
         textView.setTextSize(22);
         textView.setWidth(358);
-        layout.addView(textView);
+        linearLayout.addView(textView);
 
         // 去掉第二个参数就是无序遍历
         LinkedHashMap<String,String> jsonMap = JSON.parseObject(data,new TypeReference<LinkedHashMap<String, String>>(){});
         for(final Map.Entry<String,String>entry:jsonMap.entrySet()){
-            Button autoButton = new Button(this);
-            autoButton.setText(entry.getKey());
-            autoButton.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    String str = "你点击了"+entry.getKey()+"按键,它的值是"+entry.getValue();
-                    Toast.makeText(Auto.this,str,Toast.LENGTH_LONG).show();
-                }
-            });
-            layout.addView(autoButton);
+            create(entry.getKey(),entry.getValue());
         }
     }
+    public void create( final String key, final String value){
+        Button autoButton = new Button(Auto.this);
+        autoButton.setText(key+":"+value);
+        autoButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                String str = "你点击了"+key+"按键,它的值是"+value;
+                Toast.makeText(Auto.this,str,Toast.LENGTH_LONG).show();
+            }
+        });
+        linearLayout.addView(autoButton);
+    }
 
-    protected void addTitle(LinearLayout layout,String title){
+    protected void addTitle(String title){
         TextView textView = new TextView(this);
         textView.setText(title);
         textView.setTextSize(22);
         textView.setWidth(358);
-        layout.addView(textView);
+        linearLayout.addView(textView);
     }
-    protected void addBack(LinearLayout layout){
+    protected void addBack(){
         Button back = new Button(this);
         back.setText("返回");
         back.setOnClickListener(new View.OnClickListener() {
@@ -107,6 +145,11 @@ public class Auto extends AppCompatActivity {
                 finish();
             }
         });
-        layout.addView(back);
+        linearLayout.addView(back);
+
+        TextView textView = new TextView(this);
+        textView.setText(R.string.hello_moshuying_welcome_to_the_main_activity);
+        textView.setAutoLinkMask(Linkify.WEB_URLS);
+        linearLayout.addView(textView);
     }
 }

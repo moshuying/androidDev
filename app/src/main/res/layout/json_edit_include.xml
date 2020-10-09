@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.moshuying.JsonEdit"
+    android:isScrollContainer="true">
+
+        <EditText
+            android:id="@+id/stringArray2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="mo,shu,ying"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bundleKeyString" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:text="String"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/bundleKeyString"
+            app:layout_constraintEnd_toStartOf="@+id/bundleKeyString"
+            app:layout_constraintTop_toTopOf="@+id/bundleKeyString" />
+
+        <EditText
+            android:id="@+id/bundleKeyString2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="moshuying"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sendJson" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:text="StringArray"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/stringArray"
+            app:layout_constraintEnd_toStartOf="@+id/stringArray"
+            app:layout_constraintTop_toTopOf="@+id/stringArray" />
+
+        <Button
+            android:id="@+id/sendJson"
+            android:layout_width="386dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="15dp"
+            android:text="传递JSON"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
+
+        <EditText
+            android:id="@+id/editTextTextMultiLine"
+            android:layout_width="346dp"
+            android:layout_height="134dp"
+            android:layout_marginTop="15dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/simpleData" />
+
+        <EditText
+            android:id="@+id/bundleKeyString"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="moshuying"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sendJson" />
+
+        <EditText
+            android:id="@+id/stringArray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="mo,shu,ying"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bundleKeyString" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:text="String"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/bundleKeyString"
+            app:layout_constraintEnd_toStartOf="@+id/bundleKeyString"
+            app:layout_constraintTop_toTopOf="@+id/bundleKeyString" />
+
+        <Button
+            android:id="@+id/sendBundle"
+            android:layout_width="386dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="15dp"
+            android:text="传递Bundle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/stringArray" />
+
+        <Button
+            android:id="@+id/simpleData"
+            android:layout_width="386dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="15dp"
+            android:text="传递简单数据"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.471"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+
+<!--        <Button-->
+<!--            android:id="@+id/button"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="传递使用Serializable接口实现的对象"-->
+<!--            tools:layout_editor_absoluteX="97dp"-->
+<!--            tools:layout_editor_absoluteY="689dp" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/button3"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="传递使用Parcelable接口实现的对象"-->
+<!--            tools:layout_editor_absoluteX="97dp"-->
+<!--            tools:layout_editor_absoluteY="779dp" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/button4"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="获取活动返回的数据"-->
+<!--            tools:layout_editor_absoluteX="172dp"-->
+<!--            tools:layout_editor_absoluteY="888dp" />-->
+
+        <EditText
+            android:id="@+id/editTextTextPersonName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="15dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="data1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.528"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/editTextTextPersonName2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="data2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.535"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+
+        <TextView
+            android:id="@+id/simpleDataKey1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:text="simpleDataKey1"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName"
+            app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName"
+            app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName" />
+
+        <TextView
+            android:id="@+id/simpleDataKey2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:text="simpleDataKey2"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName2"
+            app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName2"
+            app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName2" />
+
+        <TextView
+            android:id="@+id/objkey1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:text="name"
+            app:layout_constraintBottom_toBottomOf="@+id/SerializableName"
+            app:layout_constraintEnd_toStartOf="@+id/SerializableName"
+            app:layout_constraintTop_toTopOf="@+id/SerializableName" />
+
+        <TextView
+            android:id="@+id/objkey2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:text="age"
+            app:layout_constraintBottom_toBottomOf="@+id/SerializableAge"
+            app:layout_constraintEnd_toStartOf="@+id/SerializableAge"
+            app:layout_constraintTop_toTopOf="@+id/SerializableAge" />
+
+        <EditText
+            android:id="@+id/SerializableName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="15dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="墨抒颖"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sendBundle" />
+
+        <EditText
+            android:id="@+id/SerializableAge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:inputType="number"
+            android:text="22"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/SerializableName" />
+
+        <Button
+            android:id="@+id/sendSerializableObject"
+            android:layout_width="386dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="15dp"
+            android:text="传递使用Serializable接口实现的对象"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/SerializableAge" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="2dp"
+            android:text="以逗号隔开"
+            app:layout_constraintBottom_toBottomOf="@+id/stringArray2"
+            app:layout_constraintStart_toEndOf="@+id/stringArray2"
+            app:layout_constraintTop_toTopOf="@+id/stringArray2" />
+
+        <Button
+            android:id="@+id/sendParcelableObject"
+            android:layout_width="386dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="15dp"
+            android:text="传递使用Parcelable接口实现的对象"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ParcelableAge" />
+
+        <EditText
+            android:id="@+id/ParcelableAge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:inputType="number"
+            android:text="22"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ParcelableName" />
+
+        <EditText
+            android:id="@+id/ParcelableName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="15dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="moshuying.top"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sendSerializableObject" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:text="name"
+            app:layout_constraintBottom_toBottomOf="@+id/ParcelableName"
+            app:layout_constraintEnd_toStartOf="@+id/ParcelableName"
+            app:layout_constraintTop_toTopOf="@+id/ParcelableName" />
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:text="age"
+            app:layout_constraintBottom_toBottomOf="@+id/ParcelableAge"
+            app:layout_constraintEnd_toStartOf="@+id/ParcelableAge"
+            app:layout_constraintTop_toTopOf="@+id/ParcelableAge" />
+
+        <Button
+            android:id="@+id/getActivityBackData"
+            android:layout_width="386dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="20dp"
+            android:text="打开另一个Activity以获取返回值"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.472"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sendParcelableObject" />
+
+        <Button
+            android:id="@+id/json_edit_back"
+            android:layout_width="386dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="15dp"
+            android:text="返回"
+            app:layout_constraintBottom_toTopOf="@+id/textView3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/getActivityBackData" />
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:autoLink="web"
+            android:text="@string/hello_moshuying_welcome_to_the_main_activity"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

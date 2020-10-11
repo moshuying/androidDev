@@ -74,6 +74,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this,JsonEdit.class));
             }
         });
+        findViewById(R.id.startupMode).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(MainActivity.this,StartupMode.class));
+            }
+        });
     }
     /**
      * 直接分享纯文本内容至QQ好友

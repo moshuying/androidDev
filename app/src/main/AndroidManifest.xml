@@ -29,8 +29,9 @@
         <activity android:name=".Share" />
         <activity android:name=".PredefinedOperation" />
         <activity android:name=".JsonEdit" />
-        <activity android:name=".Auto" android:theme="@style/Theme.AppCompat.Dialog"/>
-        <activity android:name=".StartupMode" android:theme="@style/Theme.MaterialComponents.Light"/>
+        <activity android:name=".Auto" android:theme="@style/Theme.MaterialComponents.Dialog"/>
+        <activity android:name=".StartupMode" />
+        <activity android:name=".SingleTop" android:launchMode="singleTop"/>
         <!--在AndroidManifest.xml中声明活动时候,在其Intent过滤器中可使用任意字符串作为活动的操作名称。-->
         <activity android:name=".HideIntent">
             <intent-filter>

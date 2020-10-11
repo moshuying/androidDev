@@ -19,8 +19,8 @@
 
     <Button
         android:id="@+id/btnStartAnother"
-        android:layout_width="386dp"
-        android:layout_height="53dp"
+        android:layout_width="392dp"
+        android:layout_height="49dp"
         android:layout_marginTop="20dp"
         android:text="@string/activity"
         app:layout_constraintEnd_toEndOf="parent"
@@ -98,5 +98,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/jsonEdit" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/getUserInput"
+        android:layout_width="392dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="20dp"
+        android:text="编程实践：获取用户输入数据"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/startupMode" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

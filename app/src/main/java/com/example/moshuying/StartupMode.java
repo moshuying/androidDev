@@ -107,9 +107,10 @@ public class StartupMode extends AppCompatActivity {
         });
         linearLayout.addView(button);
     }
+
     public void addBack(){
         MaterialButton button = new MaterialButton(this);
-        button.setBackgroundColor(Color.parseColor("#3CB371"));
+        button.setBackgroundColor(getResources().getColor(R.color.back));
         button.setText("返回上一级");
         button.setOnClickListener(new View.OnClickListener() {
             @Override

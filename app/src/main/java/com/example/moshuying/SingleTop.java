@@ -47,7 +47,7 @@ public class SingleTop extends AppCompatActivity {
         linearLayout.addView(startMain);
 
         MaterialButton back = new MaterialButton(this);
-        back.setBackgroundColor(Color.parseColor("#3CB371"));
+        back.setBackgroundColor(getResources().getColor(R.color.back));
         back.setText("返回上一级");
         back.setOnClickListener(new View.OnClickListener() {
             @Override

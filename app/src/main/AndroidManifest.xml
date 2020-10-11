@@ -32,6 +32,11 @@
         <activity android:name=".Auto" android:theme="@style/Theme.MaterialComponents.Dialog"/>
         <activity android:name=".StartupMode" />
         <activity android:name=".SingleTop" android:launchMode="singleTop"/>
+        <activity android:name=".SingleTask" android:launchMode="singleTask"/>
+        <activity android:name=".SingleTaskB" android:launchMode="standard"/>
+        <activity android:name=".SingleInstance" android:launchMode="singleInstance"/>
+        <activity android:name=".SingleInstanceB" android:launchMode="standard"/>
+
         <!--在AndroidManifest.xml中声明活动时候,在其Intent过滤器中可使用任意字符串作为活动的操作名称。-->
         <activity android:name=".HideIntent">
             <intent-filter>

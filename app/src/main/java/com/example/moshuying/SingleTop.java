@@ -18,6 +18,7 @@ public class SingleTop extends AppCompatActivity {
     protected void onCreate(Bundle state){
         super.onCreate(state);
         setContentView(R.layout.auto);
+        System.out.println("任务ID"+getTaskId()+"\n"+this.toString()+"正在创建");
         LinearLayout linearLayout = findViewById(R.id.auto_list_item);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
@@ -56,6 +57,11 @@ public class SingleTop extends AppCompatActivity {
         });
 
         linearLayout.addView(back);
+    }
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        System.out.println("任务ID"+getTaskId()+"\n"+this.toString()+"已经销毁");
     }
 }
 

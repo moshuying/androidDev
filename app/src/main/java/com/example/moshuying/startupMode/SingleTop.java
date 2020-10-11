@@ -1,14 +1,15 @@
-package com.example.moshuying;
+package com.example.moshuying.startupMode;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.moshuying.R;
+import com.example.moshuying.StartupMode;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
@@ -41,7 +42,7 @@ public class SingleTop extends AppCompatActivity {
         startMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SingleTop.this,StartupMode.class));
+                startActivity(new Intent(SingleTop.this, StartupMode.class));
             }
         });
         linearLayout.addView(startMain);

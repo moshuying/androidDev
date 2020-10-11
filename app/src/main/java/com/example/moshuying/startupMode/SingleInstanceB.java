@@ -1,8 +1,7 @@
-package com.example.moshuying;
+package com.example.moshuying.startupMode;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -11,11 +10,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.moshuying.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.shape.ShapeAppearanceModel;
 import com.google.android.material.textview.MaterialTextView;
 
-public class SingleTaskB extends AppCompatActivity {
+public class SingleInstanceB extends AppCompatActivity {
     private LinearLayout linearLayout;
     @SuppressLint({"DefaultLocale", "SetTextI18n"})
     @Override
@@ -25,15 +25,15 @@ public class SingleTaskB extends AppCompatActivity {
         linearLayout = findViewById(R.id.auto_list_item);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
-        addTitle("Single Task B Activity",18);
+        addTitle("Single Instance B Activity",18);
         addTitle(String.format("任务ID：%d\n 活动实例：%s",getTaskId(),this.toString()));
-        MaterialButton button = new MaterialButton(this);
 
+        MaterialButton button = new MaterialButton(this);
         button.setText("启动 Main Activity");
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SingleTaskB.this,SingleTask.class));
+                startActivity(new Intent(SingleInstanceB.this,SingleInstance.class));
             }
         });
         linearLayout.addView(button);
@@ -67,7 +67,7 @@ public class SingleTaskB extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SingleTaskB.this,SingleTaskB.class);
+                Intent intent = new Intent(SingleInstanceB.this,SingleInstanceB.class);
                 startActivity(intent);
             }
         });

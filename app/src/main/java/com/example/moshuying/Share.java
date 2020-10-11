@@ -101,8 +101,8 @@ public class Share extends AppCompatActivity {
                     case "新浪微博":
                         nativeShareTool.shareToSinaFriends(Share.this, false,Resource.getInstance(mContext).getPicFile().getAbsolutePath());
                         break;
-                    case "直接添加QQ群号(TIM不行哦)":
-                        QQUtil.joinQQGroup(Share.this, "jn67luEnM4G-cyfPy4HAAf8svn5JZq6z");
+                    case "直接添加QQ群号":
+                        QQUtil.joinQQGroup(Share.this, "lDilAkXFpUq7V5b5ot7p82sCJ41emI5w");
                         break;
                 }
             }

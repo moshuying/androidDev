@@ -2,12 +2,15 @@ package com.example.moshuying;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.moshuying.startupMode.SingleInstance;
+import com.example.moshuying.startupMode.SingleTask;
+import com.example.moshuying.startupMode.SingleTop;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.shape.ShapeAppearanceModel;
 import com.google.android.material.textview.MaterialTextView;
@@ -36,7 +39,7 @@ public class StartupMode extends AppCompatActivity {
     }
     @SuppressLint({"SetTextI18n", "DefaultLocale"})
     private void createSingleTop(){
-        addTitle("singleTop模式",18);
+        addTitle("single Top 模式",18);
         addTitle(String.format("任务ID：%d\n 活动实例：%s",getTaskId(),this.toString()));
         addStartSelf();
 
@@ -45,7 +48,7 @@ public class StartupMode extends AppCompatActivity {
         BActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(StartupMode.this,SingleTop.class));
+                startActivity(new Intent(StartupMode.this, SingleTop.class));
             }
         });
         linearLayout.addView(BActivity);
@@ -58,7 +61,7 @@ public class StartupMode extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(StartupMode.this,SingleTask.class));
+                startActivity(new Intent(StartupMode.this, SingleTask.class));
             }
         });
         linearLayout.addView(button);
@@ -71,7 +74,7 @@ public class StartupMode extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(StartupMode.this,SingleTaskB.class));
+                startActivity(new Intent(StartupMode.this, SingleInstance.class));
             }
         });
         linearLayout.addView(button);

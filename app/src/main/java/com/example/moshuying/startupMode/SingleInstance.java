@@ -1,8 +1,7 @@
-package com.example.moshuying;
+package com.example.moshuying.startupMode;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.moshuying.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.shape.ShapeAppearanceModel;
 import com.google.android.material.textview.MaterialTextView;
@@ -25,7 +25,7 @@ public class SingleInstance extends AppCompatActivity {
         linearLayout = findViewById(R.id.auto_list_item);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
-        addTitle("singleTask 模式",18);
+        addTitle("SingleInstance 模式",18);
         addTitle(String.format("任务ID：%d\n 活动实例：%s",getTaskId(),this.toString()));
 
         addStartSelf();

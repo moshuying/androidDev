@@ -1,38 +1,26 @@
 package com.example.moshuying;
 
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.moshuying.lib.NativeShareTool;
-import com.example.moshuying.lib.PlatformUtil;
 import com.example.moshuying.lib.QQUtil;
 import com.example.moshuying.lib.Resource;
 import com.example.moshuying.lib.ShareToolUtil;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -48,29 +36,30 @@ public class Share extends AppCompatActivity {
         mContext = this;
 
         ShareToolUtil.getPermission(this);
-        final List<String> datas = new ArrayList<>();
-        datas.add("微信好友-文本");
-        datas.add("微信好友-图片");
-        datas.add("微信好友-文件");
-        datas.add("微信朋友圈-单图");
-        datas.add("QQ好友-文本");
-        datas.add("QQ好友-图片");
-        datas.add("QQ好友-文件");
-        datas.add("QQ空间");
-        datas.add("新浪好友");
-        datas.add("新浪微博");
-        datas.add("直接添加QQ群号");
+        final List<String> dates = new ArrayList<>();
+        dates.add("微信好友-文本");
+        dates.add("微信好友-图片");
+        dates.add("微信好友-文件");
+        dates.add("微信朋友圈-单图");
+        dates.add("QQ好友-文本");
+        dates.add("QQ好友-图片");
+        dates.add("QQ好友-文件");
+        dates.add("QQ空间");
+        dates.add("新浪好友");
+        dates.add("新浪微博");
+        dates.add("直接添加QQ群号");
 
         final NativeShareTool nativeShareTool = NativeShareTool.getInstance(this);
         RecyclerView recyclerview = findViewById(R.id.recyclerview);
         recyclerview.setLayoutManager(new GridLayoutManager(this, 2));
-        MyAdapter myAdapter = new MyAdapter(datas);
+
+        MyAdapter myAdapter = new MyAdapter(dates);
         recyclerview.setAdapter(myAdapter);
         myAdapter.notifyDataSetChanged();
         myAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                switch (datas.get(position)) {
+                switch (dates.get(position)) {
                     case "微信好友-文本":
                         nativeShareTool.shareWechatFriend("测试信息，记得常去访问 www.moshuying.top 哦~·");
                         break;

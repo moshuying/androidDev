@@ -13,9 +13,6 @@ import android.widget.Toast;
 import com.example.moshuying.lib.PlatformUtil;
 
 public class MainActivity extends AppCompatActivity {
-
-    private static PlatformUtil Platformutil;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +81,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,GetUserInput.class));
+            }
+        });
+        findViewById(R.id.userInterfaceDesign).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,UserInterfaceDesign.class));
             }
         });
     }

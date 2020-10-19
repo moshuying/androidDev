@@ -48,6 +48,38 @@ public class Layout extends AppCompatActivity {
                 startActivity(intent);
             }
         }));
+        layoutLists.add(new LayoutList("3.1.5 帧布局", "层叠视图", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Layout.this,AutoLayout.class);
+                intent.putExtra("unit","3.1.5");
+                startActivity(intent);
+            }
+        }));
+        layoutLists.add(new LayoutList("3.2.3 文本字段", "自动补全的文本字段", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Layout.this,AutoLayout.class);
+                intent.putExtra("unit","3.2.3");
+                startActivity(intent);
+            }
+        }));
+        layoutLists.add(new LayoutList("3.2.7 微调框", "下拉列表", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Layout.this,AutoLayout.class);
+                intent.putExtra("unit","3.2.7");
+                startActivity(intent);
+            }
+        }));
+        layoutLists.add(new LayoutList("3.2.8 图片视图", "动态切换", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Layout.this,AutoLayout.class);
+                intent.putExtra("unit","3.2.8");
+                startActivity(intent);
+            }
+        }));
 
         RecyclerView recyclerView = findViewById(R.id.unit3_recyclerview);
         recyclerView.setAdapter(new LayoutAdapter(layoutLists));
@@ -91,7 +123,6 @@ class LayoutAdapter extends RecyclerView.Adapter<LayoutAdapter.ItemViewHolder>{
     }
     @Override
     public void onBindViewHolder(ItemViewHolder holder,int position){
-        System.out.println(position);
         LayoutList item = itemList.get(position);
         holder.title.setText(item.getTitle());
         holder.subTitle.setText(item.getSubTitle());

@@ -7,4 +7,10 @@
     <string name="hideIntent">这是隐式Intent启动的页面</string>
     <string name="AnotherAppActivity">启动QQ中的活动</string>
     <string name="openshare">进入分享页</string>
+    <string-array name="spinner_array">
+        <item>java软件开发</item>
+        <item>C++软件开发</item>
+        <item>Android游戏设计</item>
+        <item>UI设计</item>
+    </string-array>
 </resources>

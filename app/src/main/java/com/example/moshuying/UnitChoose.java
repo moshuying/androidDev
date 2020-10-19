@@ -92,7 +92,6 @@ class LayoutAdapter extends RecyclerView.Adapter<LayoutAdapter.ItemViewHolder>{
     }
     @Override
     public void onBindViewHolder(LayoutAdapter.ItemViewHolder holder, int position){
-        System.out.println(position);
         LayoutList item = itemList.get(position);
         holder.title.setText(item.getTitle());
         holder.subTitle.setText(item.getSubTitle());

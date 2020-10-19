@@ -1,62 +1,104 @@
 package com.example.moshuying.Unit3;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
-import android.util.DisplayMetrics;
-import android.widget.EditText;
-import android.widget.RelativeLayout;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.moshuying.R;
-import com.google.android.material.button.MaterialButton;
 
+import java.util.ArrayList;
+import java.util.List;
 public class Layout extends AppCompatActivity {
-    private ConstraintLayout constraintLayout;
     @Override
     protected void onCreate(Bundle state){
         super.onCreate(state);
         setContentView(R.layout.unit3_layout);
-        constraintLayout = findViewById(R.id.baseLayout);
-        createRelativeLayout();
+        List<LayoutList> layoutLists = new ArrayList<>();
+        layoutLists.add(new LayoutList("3.1.3 线性布局", "简单线性布局分配weight", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Layout.this,AutoLayout.class);
+                intent.putExtra("unit","3.1.3-1");
+                startActivity(intent);
+            }
+        }));
+
+        layoutLists.add(new LayoutList("3.1.3 线性布局", "短信发送界面", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Layout.this,AutoLayout.class);
+                intent.putExtra("unit","3.1.3-2");
+                startActivity(intent);
+            }
+        }));
+        layoutLists.add(new LayoutList("3.1.4 相对布局", "简单登录界面", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Layout.this,AutoLayout.class);
+                intent.putExtra("unit","3.1.4");
+                startActivity(intent);
+            }
+        }));
+
+        RecyclerView recyclerView = findViewById(R.id.unit3_recyclerview);
+        recyclerView.setAdapter(new LayoutAdapter(layoutLists));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
-    protected void createRelativeLayout(){
-        // 声明相对布局
-        RelativeLayout relativeLayout = new RelativeLayout(this);
-        RelativeLayout.LayoutParams relativeLayoutLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,500);
-        relativeLayout.setLayoutParams(relativeLayoutLayoutParams);
-        // 声明编辑文本框
-        EditText editText = new EditText(this);
-        int id = 1999999001;
-        editText.setText("输入用户名");
-        editText.setId(id);
-        // 获取文本框的布局属性
-        RelativeLayout.LayoutParams editTextLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
-        // 为文本框设置上边框与父视图的上边框对其
-        editTextLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP,RelativeLayout.TRUE);
-        editText.setLayoutParams(editTextLayoutParams);
-        relativeLayout.addView(editText);
-
-        EditText editText2 = new EditText(this);
-        int id2 = id+1;
-        editText2.setText("输入密码");
-        editText2.setId(id2);
-        editText2.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        RelativeLayout.LayoutParams passwordLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
-        passwordLayoutParams.addRule(RelativeLayout.BELOW,id);
-        editText2.setLayoutParams(passwordLayoutParams);
-        relativeLayout.addView(editText2);
-
-        MaterialButton button = new MaterialButton(this);
-        button.setText("确定");
-        RelativeLayout.LayoutParams buttonLayoutParams = new RelativeLayout.LayoutParams(300,RelativeLayout.LayoutParams.WRAP_CONTENT);
-        buttonLayoutParams.addRule(RelativeLayout.BELOW,id2);
-        buttonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT,RelativeLayout.TRUE);
-        button.setLayoutParams(buttonLayoutParams);
-        relativeLayout.addView(button);
-
-        constraintLayout.addView(relativeLayout);
+}
+class LayoutList {
+    private String title;
+    private String subTitle;
+    private View.OnClickListener listener;
+    public LayoutList(String title,String subTitle,View.OnClickListener listener){
+        this.title = title;
+        this.subTitle = subTitle;
+        this.listener = listener;
+    }
+    public String getTitle(){return title;}
+    public String getSubTitle() { return subTitle; }
+    public View.OnClickListener getListener() { return listener; }
+}
+class LayoutAdapter extends RecyclerView.Adapter<LayoutAdapter.ItemViewHolder>{
+    private List<LayoutList> itemList;
+    static class ItemViewHolder extends RecyclerView.ViewHolder{
+        private TextView title;
+        private TextView subTitle;
+        private Button button;
+        public ItemViewHolder(View itemView){
+            super(itemView);
+            title = itemView.findViewById(R.id.title);
+            subTitle = itemView.findViewById(R.id.subTitle);
+            button = itemView.findViewById(R.id.goNext);
+        }
+    }
+    public LayoutAdapter(List<LayoutList> itemList){
+        this.itemList = itemList;
+    }
+    @NonNull
+    @Override
+    public ItemViewHolder onCreateViewHolder(ViewGroup parent,int viewType){
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.unit3_item,parent,false);
+        return new ItemViewHolder(view);
+    }
+    @Override
+    public void onBindViewHolder(ItemViewHolder holder,int position){
+        System.out.println(position);
+        LayoutList item = itemList.get(position);
+        holder.title.setText(item.getTitle());
+        holder.subTitle.setText(item.getSubTitle());
+        holder.button.setOnClickListener(item.getListener());
+    }
+    @Override
+    public int getItemCount(){
+        return itemList.size();
     }
 }

@@ -1,9 +1,16 @@
 package com.example.moshuying.Unit3;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +19,14 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.ArrayRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.TypeReference;
 import com.example.moshuying.R;
 import com.google.android.material.button.MaterialButton;
@@ -28,12 +37,19 @@ import com.google.android.material.textview.MaterialTextView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Array;
+import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -225,40 +241,36 @@ public class AutoLayout extends AppCompatActivity{
         layout.addView(spinner);
     }
     public void create328(LinearLayout layout){
-        final ShapeableImageView shapeableImageView = new ShapeableImageView(this);
-        shapeableImageView.setImageURI(Uri.parse(""));
+        final MyImageView shapeableImageView = new MyImageView(this);
+        LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(MATCH_PARENT,500);
+        shapeableImageView.setLayoutParams(layoutParams1);
         layout.addView(shapeableImageView);
-        String res = sendByOKHttp();
-
-        class type{
-            String createtime;
-            String id;
-            String price;
-            String title;
-            String url;
-        }
-        ArrayList<type> jsonMap = JSON.parseObject(res,new TypeReference<ArrayList<type>>(){});
-
-        System.out.println(jsonMap.toArray().toString());
 
         Spinner spinner = new Spinner(this);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(MATCH_PARENT,WRAP_CONTENT);
         spinner.setLayoutParams(layoutParams);
-        // todo bugs
-        ArrayAdapter<CharSequence> arrayAdapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_dropdown_item);
-        arrayAdapter.addAll();
+        Object[] array = JSON.parseArray(sendByOKHttp()).toArray();
+
+        final CharSequence[] strings = new CharSequence[array.length];
+        for(int i =0 ;i<array.length;i++){
+            strings[i] = JSON.parseObject(array[i].toString()).get("url").toString();
+        }
+
+        ArrayAdapter<CharSequence> arrayAdapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_dropdown_item,0, Arrays.asList(strings));
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                shapeableImageView.setImageURI(Uri.parse(parent.getSelectedItem().toString()));
+                shapeableImageView.setImageURL(strings[position].toString());
+                System.out.println("onItemSelected");
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                shapeableImageView.setImageURL(strings[0].toString());
+                System.out.println("onNothingSelected");
             }
         });
         layout.addView(spinner);
@@ -296,4 +308,81 @@ class HttpGetRequest implements Callable<String> {
         }
         return returnValue;
     }
+}
+class MyImageView extends androidx.appcompat.widget.AppCompatImageView {
+    public static final int GET_DATA_SUCCESS = 1;
+    public static final int NETWORK_ERROR = 2;
+    public static final int SERVER_ERROR = 3;
+    //子线程不能操作UI，通过Handler设置图片
+    @SuppressLint("HandlerLeak")
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case GET_DATA_SUCCESS:
+                    Bitmap bitmap = (Bitmap) msg.obj;
+                    setImageBitmap(bitmap);
+                    break;
+                case NETWORK_ERROR:
+                    Toast.makeText(getContext(),"网络连接失败",Toast.LENGTH_SHORT).show();
+                    break;
+                case SERVER_ERROR:
+                    Toast.makeText(getContext(),"服务器发生错误",Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    };
+
+    public MyImageView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
+
+    public MyImageView(Context context) {
+        super(context);
+    }
+
+    public MyImageView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    //设置网络图片
+    public void setImageURL(final String path) {
+        //开启一个线程用于联网
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    //把传过来的路径转成URL
+                    URL url = new URL(path);
+                    //获取连接
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    //使用GET方法访问网络
+                    connection.setRequestMethod("GET");
+                    //超时时间为10秒
+                    connection.setConnectTimeout(10000);
+                    //获取返回码
+                    int code = connection.getResponseCode();
+                    if (code == 200) {
+                        InputStream inputStream = connection.getInputStream();
+                        //使用工厂把网络的输入流生产Bitmap
+                        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                        //利用Message把图片发给Handler
+                        Message msg = Message.obtain();
+                        msg.obj = bitmap;
+                        msg.what = GET_DATA_SUCCESS;
+                        handler.sendMessage(msg);
+                        inputStream.close();
+                    }else {
+                        //服务启发生错误
+                        handler.sendEmptyMessage(SERVER_ERROR);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    //网络连接错误
+                    handler.sendEmptyMessage(NETWORK_ERROR);
+                }
+            }
+        }.start();
+    }
+
 }

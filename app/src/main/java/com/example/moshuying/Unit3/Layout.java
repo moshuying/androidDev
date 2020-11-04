@@ -80,6 +80,23 @@ public class Layout extends AppCompatActivity {
                 startActivity(intent);
             }
         }));
+        layoutLists.add(new LayoutList("3.2.9 进度条", "进度条", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Layout.this,AutoLayout.class);
+                intent.putExtra("unit","3.2.9");
+                startActivity(intent);
+            }
+        }));
+
+        layoutLists.add(new LayoutList("3.2.10 拖动条", "拖动条拖动滑块可获得标识的数值", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Layout.this,AutoLayout.class);
+                intent.putExtra("unit","3.2.10");
+                startActivity(intent);
+            }
+        }));
 
         RecyclerView recyclerView = findViewById(R.id.unit3_recyclerview);
         recyclerView.setAdapter(new LayoutAdapter(layoutLists));

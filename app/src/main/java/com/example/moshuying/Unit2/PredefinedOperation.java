@@ -1,4 +1,4 @@
-package com.example.moshuying;
+package com.example.moshuying.Unit2;
 
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.moshuying.R;
 
 public class PredefinedOperation extends AppCompatActivity {
     @Override

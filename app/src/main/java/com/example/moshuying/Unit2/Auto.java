@@ -1,6 +1,5 @@
-package com.example.moshuying;
+package com.example.moshuying.Unit2;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.util.Linkify;
@@ -15,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.example.moshuying.R;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

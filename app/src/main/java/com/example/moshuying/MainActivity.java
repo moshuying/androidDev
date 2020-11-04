@@ -10,6 +10,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.moshuying.Unit2.BtnStartAnother;
+import com.example.moshuying.Unit2.GetUserInput;
+import com.example.moshuying.Unit2.JsonEdit;
+import com.example.moshuying.Unit2.MyAty;
+import com.example.moshuying.Unit2.PredefinedOperation;
+import com.example.moshuying.Unit2.Share;
+import com.example.moshuying.Unit2.StartupMode;
+import com.example.moshuying.Unit2.UserInterfaceDesign;
 import com.example.moshuying.lib.PlatformUtil;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 //这里显式的创建了一个Intent对象，MainActivity.this指定启动活动的上下文为当前活动，MyAty.class指定启动的目标组件为MyAty
-                Intent startMyAty = new Intent(MainActivity.this,MyAty.class);
+                Intent startMyAty = new Intent(MainActivity.this, MyAty.class);
                 startActivity(startMyAty);
             }
         });
@@ -54,39 +62,39 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.openShare).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,Share.class));
+                startActivity(new Intent(MainActivity.this, Share.class));
             }
         });
 
         findViewById(R.id.usePreOperation).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,PredefinedOperation.class));
+                startActivity(new Intent(MainActivity.this, PredefinedOperation.class));
             }
         });
 
         findViewById(R.id.jsonEdit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,JsonEdit.class));
+                startActivity(new Intent(MainActivity.this, JsonEdit.class));
             }
         });
         findViewById(R.id.startupMode).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivity(new Intent(MainActivity.this,StartupMode.class));
+                startActivity(new Intent(MainActivity.this, StartupMode.class));
             }
         });
         findViewById(R.id.getUserInput).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,GetUserInput.class));
+                startActivity(new Intent(MainActivity.this, GetUserInput.class));
             }
         });
         findViewById(R.id.userInterfaceDesign).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,UserInterfaceDesign.class));
+                startActivity(new Intent(MainActivity.this, UserInterfaceDesign.class));
             }
         });
     }

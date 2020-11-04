@@ -1,4 +1,4 @@
-package com.example.moshuying;
+package com.example.moshuying.Unit2;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.moshuying.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;

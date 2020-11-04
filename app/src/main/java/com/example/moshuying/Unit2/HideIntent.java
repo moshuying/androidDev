@@ -1,7 +1,9 @@
-package com.example.moshuying;
+package com.example.moshuying.Unit2;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.example.moshuying.R;
 
 public class HideIntent extends Activity {
     @Override

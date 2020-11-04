@@ -1,4 +1,4 @@
-package com.example.moshuying.startupMode;
+package com.example.moshuying.Unit2.startupMode;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -15,8 +15,8 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.shape.ShapeAppearanceModel;
 import com.google.android.material.textview.MaterialTextView;
 
-public class SingleTask extends AppCompatActivity {
-    public LinearLayout linearLayout;
+public class SingleInstanceB extends AppCompatActivity {
+    private LinearLayout linearLayout;
     @SuppressLint({"DefaultLocale", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle state){
@@ -25,20 +25,20 @@ public class SingleTask extends AppCompatActivity {
         linearLayout = findViewById(R.id.auto_list_item);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
-        addTitle("single Task 模式",18);
+        addTitle("Single Instance B Activity",18);
         addTitle(String.format("任务ID：%d\n 活动实例：%s",getTaskId(),this.toString()));
 
-        addStartSelf();
-
         MaterialButton button = new MaterialButton(this);
-        button.setText("启动 B Activity");
+        button.setText("启动 Main Activity");
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SingleTask.this,SingleTaskB.class));
+                startActivity(new Intent(SingleInstanceB.this,SingleInstance.class));
             }
         });
         linearLayout.addView(button);
+
+        addStartSelf("启动 B Activity");
 
         addBack();
     }
@@ -60,14 +60,14 @@ public class SingleTask extends AppCompatActivity {
         return textView;
     }
     @SuppressLint("SetTextI18n")
-    public void addStartSelf(){
+    public void addStartSelf(String title){
         MaterialButton button = new MaterialButton(this);
         button.setShapeAppearanceModel(new ShapeAppearanceModel());
-        button.setText("启动 Main Activity");
+        button.setText(title);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SingleTask.this,SingleTask.class);
+                Intent intent = new Intent(SingleInstanceB.this,SingleInstanceB.class);
                 startActivity(intent);
             }
         });
@@ -86,5 +86,4 @@ public class SingleTask extends AppCompatActivity {
         });
         linearLayout.addView(button);
     }
-
 }

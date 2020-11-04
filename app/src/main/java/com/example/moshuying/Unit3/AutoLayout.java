@@ -34,6 +34,7 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
 
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -87,6 +88,7 @@ public class AutoLayout extends AppCompatActivity{
             case "3.2.3": create323((LinearLayout) createLayout("Linear"));break;
             case "3.2.7": create327((LinearLayout) createLayout("Linear"));break;
             case "3.2.8": create328((LinearLayout) createLayout("Linear"));break;
+            case "3.2.9": create329((LinearLayout) createLayout("Linear"));break;
             default:break;
         }
     }
@@ -290,6 +292,15 @@ public class AutoLayout extends AppCompatActivity{
         }
         LinkedHashMap<String,String> jsonMap = JSON.parseObject(data,new TypeReference<LinkedHashMap<String, String>>(){});
         return jsonMap.get("data");
+    }
+    public void create329(LinearLayout layout){
+        ProgressBar progressBar = new ProgressBar(this);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(MATCH_PARENT,WRAP_CONTENT);
+        progressBar.setLayoutParams(layoutParams);
+        layout.addView(progressBar);
+        ProgressBar progressBar1 = new ProgressBar(this);
+        LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(MATCH_PARENT,WRAP_CONTENT);
+        //todo 修改为水平样式
     }
 }
 class HttpGetRequest implements Callable<String> {

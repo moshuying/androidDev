@@ -1,15 +1,17 @@
-package com.example.moshuying.startupMode;
+package com.example.moshuying.Unit2.startupMode;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.moshuying.R;
-import com.example.moshuying.StartupMode;
+import com.example.moshuying.Unit2.StartupMode;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
@@ -22,6 +24,15 @@ public class SingleTop extends AppCompatActivity {
         System.out.println("任务ID"+getTaskId()+"\n"+this.toString()+"正在创建");
         LinearLayout linearLayout = findViewById(R.id.auto_list_item);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
+
+        TextView title = new TextView(this);
+        title.setTextSize(18);
+        title.setText("SingleTop模式");
+        title.setGravity(Gravity.CENTER);
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(10,20,10,20);
+        title.setLayoutParams(layoutParams);
+        linearLayout.addView(title);
 
         MaterialTextView textView = new MaterialTextView(this);
         textView.setText(String.format("任务ID：%d\n 活动实例：%s",getTaskId(),this.toString()));

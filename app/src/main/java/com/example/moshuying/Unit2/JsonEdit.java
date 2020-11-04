@@ -1,16 +1,15 @@
-package com.example.moshuying;
+package com.example.moshuying.Unit2;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.moshuying.R;
 
 import java.io.Serializable;
 
@@ -65,7 +64,7 @@ public class JsonEdit extends AppCompatActivity {
         findViewById(R.id.simpleData).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(JsonEdit.this,Auto.class);
+                Intent intent = new Intent(JsonEdit.this, Auto.class);
                 TextView textView1 = findViewById(R.id.simpleDataKey1);
                 TextView textView2 = findViewById(R.id.simpleDataKey2);
                 intent.putExtra("type","Simple");

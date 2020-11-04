@@ -1,4 +1,4 @@
-package com.example.moshuying;
+package com.example.moshuying.Unit2;
 
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.moshuying.R;
 import com.example.moshuying.lib.NativeShareTool;
 import com.example.moshuying.lib.QQUtil;
 import com.example.moshuying.lib.Resource;

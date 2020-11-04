@@ -1,4 +1,4 @@
-package com.example.moshuying;
+package com.example.moshuying.Unit2;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -9,6 +9,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.moshuying.MainActivity;
+import com.example.moshuying.R;
 
 public class InternetActivity extends AppCompatActivity {
     @Override
@@ -31,7 +34,7 @@ public class InternetActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(InternetActivity.this,MainActivity.class));
+                startActivity(new Intent(InternetActivity.this, MainActivity.class));
             }
         });
         layout.addView(back);

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BtnStartAnother">
+    tools:context=".Unit2.BtnStartAnother">
 
     <Button
         android:id="@+id/destory"

@@ -38,7 +38,7 @@ public class ShareToolUtil {
             try {
                 FileOutputStream out = new FileOutputStream(filePic);
                 if (bitmap == null) {
-                    bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.pic_512x512);
+                    bitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.logo);
                 }
                 bitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
                 try {

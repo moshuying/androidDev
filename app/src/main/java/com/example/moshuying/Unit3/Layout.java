@@ -18,89 +18,37 @@ import com.example.moshuying.R;
 import java.util.ArrayList;
 import java.util.List;
 public class Layout extends AppCompatActivity {
+    private List<LayoutList> layoutLists = new ArrayList<>();
     @Override
     protected void onCreate(Bundle state){
         super.onCreate(state);
         setContentView(R.layout.unit3_layout);
-        List<LayoutList> layoutLists = new ArrayList<>();
-        layoutLists.add(new LayoutList("3.1.3 线性布局", "简单线性布局分配weight", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Layout.this,AutoLayout.class);
-                intent.putExtra("unit","3.1.3-1");
-                startActivity(intent);
-            }
-        }));
 
-        layoutLists.add(new LayoutList("3.1.3 线性布局", "短信发送界面", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Layout.this,AutoLayout.class);
-                intent.putExtra("unit","3.1.3-2");
-                startActivity(intent);
-            }
-        }));
-        layoutLists.add(new LayoutList("3.1.4 相对布局", "简单登录界面", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Layout.this,AutoLayout.class);
-                intent.putExtra("unit","3.1.4");
-                startActivity(intent);
-            }
-        }));
-        layoutLists.add(new LayoutList("3.1.5 帧布局", "层叠视图", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Layout.this,AutoLayout.class);
-                intent.putExtra("unit","3.1.5");
-                startActivity(intent);
-            }
-        }));
-        layoutLists.add(new LayoutList("3.2.3 文本字段", "自动补全的文本字段", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Layout.this,AutoLayout.class);
-                intent.putExtra("unit","3.2.3");
-                startActivity(intent);
-            }
-        }));
-        layoutLists.add(new LayoutList("3.2.7 微调框", "下拉列表", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Layout.this,AutoLayout.class);
-                intent.putExtra("unit","3.2.7");
-                startActivity(intent);
-            }
-        }));
-        layoutLists.add(new LayoutList("3.2.8 图片视图", "动态切换", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Layout.this,AutoLayout.class);
-                intent.putExtra("unit","3.2.8");
-                startActivity(intent);
-            }
-        }));
-        layoutLists.add(new LayoutList("3.2.9 进度条", "进度条", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Layout.this,AutoLayout.class);
-                intent.putExtra("unit","3.2.9");
-                startActivity(intent);
-            }
-        }));
-
-        layoutLists.add(new LayoutList("3.2.10 拖动条", "拖动条拖动滑块可获得标识的数值", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Layout.this,AutoLayout.class);
-                intent.putExtra("unit","3.2.10");
-                startActivity(intent);
-            }
-        }));
+        AddLayoutList("3.1.3-1 线性布局","3","简单线性布局分配weight");
+        AddLayoutList("3.1.3-2","线性布局","短信发送界面");
+        AddLayoutList("3.1.4","相对布局","简单登录界面");
+        AddLayoutList("3.1.5","帧布局","层叠视图");
+        AddLayoutList("3.2.3","文本字段","自动补全的文本字段");
+        AddLayoutList("3.2.7","微调框","下拉列表");
+        AddLayoutList("3.2.8","图片视图","动态切换");
+        AddLayoutList("3.2.9","进度条","进度条");
+        AddLayoutList("3.2.10","拖动条","拖动条拖动滑块可获得标识的数值");
+        AddLayoutList("3.3.1","使用Toast","类似于对话框的方式向用户提供消息通知");
+        AddLayoutList("3.3.2","使用Notification","在通知区域显示通知图标，展开抽屉式通知栏，可查看通知的详细信息。");
 
         RecyclerView recyclerView = findViewById(R.id.unit3_recyclerview);
         recyclerView.setAdapter(new LayoutAdapter(layoutLists));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+    private void AddLayoutList(final String unit, String title, String subtitle){
+        layoutLists.add(new LayoutList(unit+" "+title, subtitle, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Layout.this,AutoLayout.class);
+                intent.putExtra("unit",unit);
+                startActivity(intent);
+            }
+        }));
     }
 }
 class LayoutList {

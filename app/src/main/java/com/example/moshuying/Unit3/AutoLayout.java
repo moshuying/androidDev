@@ -1,12 +1,16 @@
 package com.example.moshuying.Unit3;
 
 import android.annotation.SuppressLint;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -23,12 +27,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.ArrayRes;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.TypeReference;
 import com.example.moshuying.R;
+import com.example.moshuying.Unit2.Auto;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.TextInputEditText;
@@ -36,6 +43,7 @@ import com.google.android.material.textview.MaterialTextView;
 
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -89,6 +97,9 @@ public class AutoLayout extends AppCompatActivity{
             case "3.2.7": create327((LinearLayout) createLayout("Linear"));break;
             case "3.2.8": create328((LinearLayout) createLayout("Linear"));break;
             case "3.2.9": create329((LinearLayout) createLayout("Linear"));break;
+            case "3.2.10": create3210((LinearLayout) createLayout("Linear"));break;
+            case "3.3.1": create331((LinearLayout) createLayout("Linear"));break;
+            case "3.3.2": create332((LinearLayout) createLayout("Linear"));break;
             default:break;
         }
     }
@@ -277,6 +288,189 @@ public class AutoLayout extends AppCompatActivity{
         });
         layout.addView(spinner);
     }
+    public void create329(LinearLayout layout){
+        layout.addView(AddMinTitle("默认样式的进度条",18));
+        ProgressBar progressBar = new ProgressBar(this);
+        layout.addView(progressBar);
+        layout.addView(AddMinTitle("大图标的圆环进度条",18));
+        ProgressBar progressBar1 = new ProgressBar(this,null,android.R.attr.progressBarStyleLarge);
+        layout.addView(progressBar1);
+        layout.addView(AddMinTitle("小图标的圆环进度条",18));
+        ProgressBar progressBar2 = new ProgressBar(this,null,android.R.attr.progressBarStyleSmall);
+        layout.addView(progressBar2);
+        layout.addView(AddMinTitle("水平样式环进度条",18));
+        ProgressBar progressBar3 = new ProgressBar(this,null,android.R.attr.progressBarStyleHorizontal);
+        layout.addView(progressBar3);
+    }
+    public void create3210(LinearLayout layout){
+        layout.addView(AddMinTitle("拖动条",18));
+        SeekBar seekBar = new SeekBar(this);
+        seekBar.setMax(100);
+        final MaterialTextView textView = new MaterialTextView(this);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                textView.setText("当前拖动条值："+progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        layout.addView(seekBar);
+        layout.addView(textView);
+    }
+    @SuppressLint("SetTextI18n")
+    public void create331(LinearLayout layout){
+        layout.addView(AddMinTitle("使用Toast",18));
+        MaterialButton shortButton = new MaterialButton(this);
+        shortButton.setText("显示较短时间的Toast");
+        shortButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast tost = Toast.makeText(AutoLayout.this,"这是一个较短时间的Toast",Toast.LENGTH_SHORT);
+                tost.show();
+            }
+        });
+        layout.addView(shortButton);
+
+        MaterialButton longButton = new MaterialButton(this);
+        longButton.setText("显示较长时间的Toast");
+        longButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast tost = Toast.makeText(AutoLayout.this,"这是一个较长时间的Toast",Toast.LENGTH_LONG);
+                tost.show();
+            }
+        });
+        layout.addView(longButton);
+
+        MaterialButton customButton = new MaterialButton(this);
+        customButton.setText("显示自定义视图的Toast");
+        customButton.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View v) {
+                final Toast tost = new Toast(AutoLayout.this);
+                LinearLayout linearLayout = new LinearLayout(AutoLayout.this);
+                linearLayout.setOrientation(LinearLayout.VERTICAL);
+
+                final ImageView imageView = new ImageView(AutoLayout.this);
+                linearLayout.addView(imageView);
+
+                @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        switch (msg.what){
+                            case 1:
+                                Bitmap bitmap = (Bitmap) msg.obj;
+                                imageView.setImageBitmap(bitmap);
+                                tost.show();
+                                break;
+                            case 2:
+                                Toast.makeText(AutoLayout.this,"网络连接失败",Toast.LENGTH_SHORT).show();
+                                break;
+                            case 3:
+                                Toast.makeText(AutoLayout.this,"服务器发生错误",Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                    }
+                };
+                //开启一个线程用于联网
+                new Thread() {
+                    @Override
+                    public void run() {
+                        try {
+                            //把传过来的路径转成URL
+                            URL url = new URL("https://exampleapp.moshuying.top/assets/images/book.png");
+                            //获取连接
+                            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                            //使用GET方法访问网络
+                            connection.setRequestMethod("GET");
+                            //超时时间为10秒
+                            connection.setConnectTimeout(10000);
+                            //获取返回码
+                            int code = connection.getResponseCode();
+                            if (code == 200) {
+                                InputStream inputStream = connection.getInputStream();
+                                //使用工厂把网络的输入流生产Bitmap
+                                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                                //利用Message把图片发给Handler
+                                Message msg = Message.obtain();
+                                msg.obj = bitmap;
+                                msg.what = 1;
+                                handler.sendMessage(msg);
+                                inputStream.close();
+                            }else {
+                                //服务启发生错误
+                                handler.sendEmptyMessage(3);
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            //网络连接错误
+                            handler.sendEmptyMessage(2);
+                        }
+                    }
+                }.start();
+
+                MaterialTextView textView = new MaterialTextView(AutoLayout.this);
+                textView.setText("这是一个自定义视图的Toast");
+                tost.setView(linearLayout);
+                tost.setGravity(Gravity.CENTER_VERTICAL,0,0);
+                linearLayout.addView(textView);
+            }
+        });
+        layout.addView(customButton);
+    }
+    public void create332(LinearLayout layout){
+        layout.addView(AddMinTitle("使用Notification",18));
+        MaterialButton button = new MaterialButton(this);
+        layout.addView(button);
+        button.setText("创建一个Notification");
+        button.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View v) {
+//                Notification notification = new NotificationCompat.Builder(AutoLayout.this)
+//                        .setSmallIcon(R.mipmap.logo)
+//                        .setContentTitle("(｡･∀･)ﾉﾞ嗨 你有一个新消息！")
+//                        .setContentText("你已经学会了创建Notification 了")
+//                        .setAutoCancel(true).build();
+//                NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//                notificationManager.notify(1,notification);
+
+                String id ="channel_1";//channel的id
+                String description = "123";//channel的描述信息
+                int importance = NotificationManager.IMPORTANCE_LOW;//channel的重要性
+                NotificationChannel channel = new NotificationChannel(id, "123", importance);//生成channel
+                //为channel添加属性
+                channel.enableVibration(true); //震动
+                channel.enableLights(true);//提示灯
+                NotificationManager manager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+                manager.createNotificationChannel(channel);//添加channel
+                Notification notification = new Notification.Builder(AutoLayout.this,id)
+                        //注意这里多了一个参数id，指配置的NotificationChannel的id
+                        //你可以自己去试一下 运行一次后 即配置完后 将这行代码以上的代
+                        //码注释掉 将参数id直接改成“channel_1”也可以成功运行
+                        //但改成别的如“channel_2”就不行了
+                        .setCategory(Notification.CATEGORY_MESSAGE)
+                        .setSmallIcon(R.mipmap.logo)
+                        .setContentTitle("(｡･∀･)ﾉﾞ嗨， 你有一个新消息")
+                        .setContentText("你已经学会创建Notification了")
+//                        .setContentIntent(pendingIntent)
+                        .setAutoCancel(true)
+                        .build();
+                manager.notify(1,notification);
+            }
+        });
+    }
     public static String sendByOKHttp() {
         ExecutorService executorService = Executors.newCachedThreadPool();
         HttpGetRequest httpGetRequest = new HttpGetRequest();
@@ -293,14 +487,14 @@ public class AutoLayout extends AppCompatActivity{
         LinkedHashMap<String,String> jsonMap = JSON.parseObject(data,new TypeReference<LinkedHashMap<String, String>>(){});
         return jsonMap.get("data");
     }
-    public void create329(LinearLayout layout){
-        ProgressBar progressBar = new ProgressBar(this);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(MATCH_PARENT,WRAP_CONTENT);
-        progressBar.setLayoutParams(layoutParams);
-        layout.addView(progressBar);
-        ProgressBar progressBar1 = new ProgressBar(this);
-        LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(MATCH_PARENT,WRAP_CONTENT);
-        //todo 修改为水平样式
+    public TextView AddMinTitle(String title,int size){
+        MaterialTextView textView = new MaterialTextView(this);
+        textView.setText(title);
+        textView.setTextSize(size);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        textView.setGravity(Gravity.CENTER);
+        textView.setLayoutParams(layoutParams);
+        return textView;
     }
 }
 class HttpGetRequest implements Callable<String> {

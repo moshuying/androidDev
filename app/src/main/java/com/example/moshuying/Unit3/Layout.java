@@ -43,6 +43,10 @@ public class Layout extends AppCompatActivity {
         AddLayoutList("3.6.1","ListView","android内置列表样式");
         AddLayoutList("3.6.2","自定义ListView列表项布局","让列表项显示更丰富的内容");
         AddLayoutList("3.6.3","处理ListView单击事件","让列表项响应用户单机事件");
+        AddLayoutList("3.7.1","RecyclerView","RecyclerView基本用法");
+        AddLayoutList("3.7.2","RecyclerView","自定义RecyclerView列表项布局");
+        AddLayoutList("3.7.3","RecyclerView","RecyclerView布局");
+        AddLayoutList("3.7.4","RecyclerView","处理RecyclerView单机事件");
 
 
         RecyclerView recyclerView = findViewById(R.id.unit3_recyclerview);

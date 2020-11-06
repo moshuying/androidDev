@@ -36,9 +36,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.ArrayRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -81,6 +84,7 @@ public class AutoLayout extends AppCompatActivity{
     private LinearLayout linearLayout;
     private Intent intent;
     private Menu ClassMenu;
+    private String[] data = {"使用Android Studio环境","Android Studio 实战","Android 编程权威指南"};
     private final int MATCH_PARENT = ViewGroup.LayoutParams.MATCH_PARENT;
     private final int WRAP_CONTENT = ViewGroup.LayoutParams.WRAP_CONTENT;
     @Override
@@ -116,6 +120,8 @@ public class AutoLayout extends AppCompatActivity{
             case "3.6.1": create361((LinearLayout) createLayout("Linear"));break;
             case "3.6.2": create362((LinearLayout) createLayout("Linear"));break;
             case "3.6.3": create363((LinearLayout) createLayout("Linear"));break;
+            case "3.7.1": create371((LinearLayout) createLayout("Linear"));break;
+            case "3.7.2": create372((LinearLayout) createLayout("Linear"));break;
             default:break;
         }
     }
@@ -599,7 +605,6 @@ public class AutoLayout extends AppCompatActivity{
     }
     public void create361(LinearLayout layout){
         layout.addView(AddMinTitle(intent.getStringExtra("title"),18));
-        String[] data = {"使用Android Studio环境","Android Studio 实战","Android 编程权威指南"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,data);
         ListView listView = new ListView(this);
         listView.setAdapter(adapter);
@@ -655,6 +660,7 @@ public class AutoLayout extends AppCompatActivity{
         return listView;
     }
     public void create363(LinearLayout layout){
+        layout.addView(AddMinTitle(intent.getStringExtra("title"),18));
         ListView listView = create362(layout);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -663,6 +669,43 @@ public class AutoLayout extends AppCompatActivity{
                 Toast.makeText(AutoLayout.this,book.getName(),Toast.LENGTH_LONG).show();
             }
         });
+    }
+    public void create371(LinearLayout layout){
+        layout.addView(AddMinTitle(intent.getStringExtra("title"),18));
+        RecyclerView recyclerView = new RecyclerView(this);
+        layout.addView(recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new RecyclerView.Adapter() {
+            class ItemViewHolder extends RecyclerView.ViewHolder{
+                private TextView itemViewHolder;
+                public ItemViewHolder(TextView textView){
+                    super(textView);
+                    itemViewHolder = textView;
+                }
+                public TextView getItemViewHolder(){
+                    return itemViewHolder;
+                }
+            }
+            @NonNull
+            @Override
+            public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+                return new ItemViewHolder(new TextView(viewGroup.getContext()));
+            }
+
+            @Override
+            public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+                ItemViewHolder itemViewHolder = (ItemViewHolder) viewHolder;
+                itemViewHolder.getItemViewHolder().setText(i+":"+data[i%3]);
+            }
+
+            @Override
+            public int getItemCount() {
+                return 50;
+            }
+        });
+    }
+    public void create372(LinearLayout layout){
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){

@@ -1,10 +1,15 @@
 package com.example.moshuying.Unit3;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,11 +21,15 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -41,38 +50,37 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
 
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Array;
-import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import okhttp3.OkHttp;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 public class AutoLayout extends AppCompatActivity{
     private LinearLayout linearLayout;
+    private Intent intent;
+    private Menu ClassMenu;
     private final int MATCH_PARENT = ViewGroup.LayoutParams.MATCH_PARENT;
     private final int WRAP_CONTENT = ViewGroup.LayoutParams.WRAP_CONTENT;
     @Override
@@ -85,7 +93,7 @@ public class AutoLayout extends AppCompatActivity{
         layoutParams.height = MATCH_PARENT;
         linearLayout.setLayoutParams(layoutParams);
 
-        Intent intent = getIntent();
+        intent = getIntent();
         String unit = intent.getStringExtra("unit");
         assert unit != null;
         switch (unit){
@@ -100,6 +108,14 @@ public class AutoLayout extends AppCompatActivity{
             case "3.2.10": create3210((LinearLayout) createLayout("Linear"));break;
             case "3.3.1": create331((LinearLayout) createLayout("Linear"));break;
             case "3.3.2": create332((LinearLayout) createLayout("Linear"));break;
+            case "3.4.1": create341((LinearLayout) createLayout("Linear"));break;
+            case "3.4.2": create342((LinearLayout) createLayout("Linear"));break;
+            case "3.4.3": create343((LinearLayout) createLayout("Linear"));break;
+            case "3.4.4": create344((LinearLayout) createLayout("Linear"));break;
+            case "3.5": create35((LinearLayout) createLayout("Linear"));break;
+            case "3.6.1": create361((LinearLayout) createLayout("Linear"));break;
+            case "3.6.2": create362((LinearLayout) createLayout("Linear"));break;
+            case "3.6.3": create363((LinearLayout) createLayout("Linear"));break;
             default:break;
         }
     }
@@ -470,6 +486,196 @@ public class AutoLayout extends AppCompatActivity{
                 manager.notify(1,notification);
             }
         });
+    }
+    @SuppressLint("SetTextI18n")
+    public void create341(LinearLayout layout){
+        layout.addView(AddMinTitle("Alert Dialog",18));
+        MaterialButton button = new MaterialButton(AutoLayout.this);
+        layout.addView(button);
+        button.setText("显示一个Alert Dialog");
+        final MaterialTextView textView = new MaterialTextView(this);
+        layout.addView(textView);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(AutoLayout.this);
+                dialog.setTitle("这是一个Alert Dialog");
+                dialog.setMessage("对话框的详细信息：请选择\"取消\"还是\"确认\"");
+                dialog.setCancelable(false);
+                dialog.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        textView.setText("你选择了确认");
+                    }
+                });
+                dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        textView.setText("你选择了取消");
+                    }
+                });
+                dialog.setNeutralButton("中立", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        textView.setText("你选择了中立");
+                    }
+                });
+
+                dialog.show();
+            }
+        });
+    }
+    public void create342(LinearLayout layout){
+        layout.addView(AddMinTitle("ProgressDialog",18));
+        MaterialButton button = new MaterialButton(this);
+        button.setText("打开进度条对话框");
+        layout.addView(button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ProgressDialog dialog = new ProgressDialog(AutoLayout.this);
+                dialog.setTitle("这是一个进度条对话框");// 设置标题
+                dialog.setMessage("请耐心等待，正在处理数据.....");
+                dialog.setCancelable(true);
+                dialog.show();
+            }
+        });
+    }
+    @SuppressLint("SetTextI18n")
+    public void create343(LinearLayout layout){
+        layout.addView(AddMinTitle(intent.getStringExtra("title"),18));
+        MaterialButton button = new MaterialButton(this);
+        layout.addView(button);
+        button.setText("启动"+intent.getStringExtra("title"));
+        button.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(AutoLayout.this,new DatePickerDialog.OnDateSetListener() {
+                    @SuppressLint("DefaultLocale")
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        TextView textView = new TextView(AutoLayout.this);
+                        textView.setText(String.format("你选择的日期：%d年%d月%d日",year,month,dayOfMonth));
+                    }
+                },2020,11,6);
+                datePickerDialog.show();
+            }
+        });
+    }
+    @SuppressLint("SetTextI18n")
+    public void create344(LinearLayout layout){
+        layout.addView(AddMinTitle(intent.getStringExtra("title"),18));
+        MaterialButton button = new MaterialButton(this);
+        layout.addView(button);
+        button.setText("启动"+intent.getStringExtra("title"));
+        button.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(AutoLayout.this, new TimePickerDialog.OnTimeSetListener() {
+                    @SuppressLint("DefaultLocale")
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        TextView textView = new TextView(AutoLayout.this);
+                        textView.setText(String.format("你选择的时间：%d:%d",hourOfDay,minute));
+                    }
+                }, 0, 0, true);
+                timePickerDialog.show();
+            }
+        });
+    }
+    public void create35(LinearLayout layout){
+        layout.addView(AddMinTitle(intent.getStringExtra("title"),18));
+        MaterialButton button = new MaterialButton(this);
+        layout.addView(button);
+        button.setText("启动菜单项");
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AutoLayout.this.onCreateOptionsMenu(ClassMenu);
+            }
+        });
+    }
+    public void create361(LinearLayout layout){
+        layout.addView(AddMinTitle(intent.getStringExtra("title"),18));
+        String[] data = {"使用Android Studio环境","Android Studio 实战","Android 编程权威指南"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,data);
+        ListView listView = new ListView(this);
+        listView.setAdapter(adapter);
+        layout.addView(listView);
+    }
+    class Book{
+        private int picId;
+        private String name;
+        Book(String name,int picId){
+            this.picId = picId;
+            this.name = name;
+        }
+        public String getName() { return name; }
+        public int getPicId() { return picId; }
+    }
+    class BookAdapter extends ArrayAdapter<Book>{
+        public int resId;
+        public BookAdapter(Context context, int resource, List<Book> objects){
+            super(context,resource,objects);
+            resId = resource;
+        }
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent){
+            Book book = getItem(position);
+            View view = LayoutInflater.from(getContext()).inflate(resId,parent,false);
+            TextView bookname = new TextView(getContext());
+            bookname.setText(book.getName());
+            bookname.setGravity(Gravity.CENTER_VERTICAL);
+            ImageView imageView = new ImageView(getContext());
+            imageView.setImageResource(book.getPicId());
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(200,200);
+            imageView.setLayoutParams(layoutParams);
+            LinearLayout linearLayout = view.findViewById(R.id.auto_list_item);
+            linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+            linearLayout.addView(imageView);
+            linearLayout.addView(bookname);
+            return view;
+        }
+    }
+    private List<Book> bookList;
+    public ListView create362(LinearLayout layout){
+        layout.addView(AddMinTitle(intent.getStringExtra("title"),18));
+        bookList = new ArrayList<Book>();
+        String[] data = {"使用Android Studio环境","Android Studio 实战","Android 编程权威指南"};
+        bookList.add(new Book(data[0],R.drawable.ic_chemistry));
+        bookList.add(new Book(data[1],R.drawable.ic_education_forum));
+        bookList.add(new Book(data[2],R.drawable.ic_learning_material));
+
+        BookAdapter adapter = new BookAdapter(AutoLayout.this,R.layout.auto,bookList);
+        ListView listView = new ListView(this);
+        listView.setAdapter(adapter);
+        layout.addView(listView);
+        return listView;
+    }
+    public void create363(LinearLayout layout){
+        ListView listView = create362(layout);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Book book = bookList.get(position);
+                Toast.makeText(AutoLayout.this,book.getName(),Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        if(ClassMenu==null){
+            ClassMenu = menu;
+            return super.onCreateOptionsMenu(menu);
+        }
+        MenuItem menuItem = ClassMenu.add(1,100,1,"菜单项");
+        menuItem.setTitle("我是一个菜单");
+        menuItem.setIcon(R.mipmap.logo);
+        menu.add(1,100,1,"菜单项1");
+        menu.add(1,101,1,"菜单项2");
+        return  true;
     }
     public static String sendByOKHttp() {
         ExecutorService executorService = Executors.newCachedThreadPool();

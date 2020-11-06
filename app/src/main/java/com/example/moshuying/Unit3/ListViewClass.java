@@ -17,7 +17,7 @@ import com.example.moshuying.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListView extends AppCompatActivity {
+public class ListViewClass extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle state){
         super.onCreate(state);

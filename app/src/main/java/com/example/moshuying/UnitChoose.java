@@ -36,6 +36,12 @@ public class UnitChoose extends AppCompatActivity {
         BaseLinearLayout.addView(relativeLayout);
 
         List<LayoutList> layoutLists = new ArrayList<>();
+        layoutLists.add(new LayoutList("一单元", "开发起步", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(UnitChoose.this,Unit1.class));
+            }
+        }));
         layoutLists.add(new LayoutList("二单元", "活动", new View.OnClickListener() {
             @Override
             public void onClick(View v) {

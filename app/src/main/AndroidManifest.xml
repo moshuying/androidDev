@@ -25,6 +25,7 @@
         </activity>
         <!--项目中的所有活动都应该在项目清单文件AndroidManifest.xml文件中声明-->
         <activity android:name=".MainActivity" />
+        <activity android:name=".Unit1" />
         <activity android:name=".Unit2.BtnStartAnother" />
         <activity android:name=".Unit2.MyAty" />
         <activity android:name=".Unit2.Share" />

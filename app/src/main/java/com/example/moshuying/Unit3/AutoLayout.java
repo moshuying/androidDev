@@ -19,6 +19,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -62,8 +65,11 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -87,6 +93,7 @@ public class AutoLayout extends AppCompatActivity{
     private String[] data = {"使用Android Studio环境","Android Studio 实战","Android 编程权威指南"};
     private final int MATCH_PARENT = ViewGroup.LayoutParams.MATCH_PARENT;
     private final int WRAP_CONTENT = ViewGroup.LayoutParams.WRAP_CONTENT;
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     public void onCreate(Bundle state){
         super.onCreate(state);
@@ -122,6 +129,8 @@ public class AutoLayout extends AppCompatActivity{
             case "3.6.3": create363((LinearLayout) createLayout("Linear"));break;
             case "3.7.1": create371((LinearLayout) createLayout("Linear"));break;
             case "3.7.2": create372((LinearLayout) createLayout("Linear"));break;
+            case "3.8": create38((LinearLayout) createLayout("Linear"));break;
+            case "3.8-2": create382((LinearLayout) createLayout("Linear"));break;
             default:break;
         }
     }
@@ -705,7 +714,167 @@ public class AutoLayout extends AppCompatActivity{
         });
     }
     public void create372(LinearLayout layout){
+//        class BookAdpater extends RecyclerView.Adpter<BookAdpater.ItemViewHolder>{
+//            private List<Book> bookList;
+//             class ItemViewHolder extends RecyclerView.ViewHolder{
+//                private TextView bookName;
+//                private ImageView bookPic;
+//                public ItemViewHolder(View itemView){
+//                    super(itemView);
+//                }
+//            }
+//        }
+    }
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public View[] create38View(LinearLayout layout){
+        int MATCH_PARENT=RelativeLayout.LayoutParams.MATCH_PARENT,WRAP_CONTENT=RelativeLayout.LayoutParams.WRAP_CONTENT;
+        RelativeLayout relativeLayout = new RelativeLayout(this);
+        RelativeLayout.LayoutParams RLayoutParams = new RelativeLayout.LayoutParams(MATCH_PARENT,WRAP_CONTENT);
+        RLayoutParams.setMargins(10,170,10,0);
+        relativeLayout.setLayoutParams(RLayoutParams);
+        layout.addView(relativeLayout);
 
+        final EditText username = new EditText(this);
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(MATCH_PARENT,WRAP_CONTENT);
+        layoutParams.topMargin=50;
+        username.setLayoutParams(layoutParams);
+        username.setInputType(InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
+        username.setId(View.generateViewId());
+        username.setHint("请输入用户名");
+        relativeLayout.addView(username);
+
+        final EditText password = new EditText(this);
+        RelativeLayout.LayoutParams layoutParams1 = new RelativeLayout.LayoutParams(MATCH_PARENT,WRAP_CONTENT);
+        layoutParams1.topMargin = 5;
+        layoutParams1.addRule(RelativeLayout.BELOW,username.getId());
+        password.setLayoutParams(layoutParams1);
+        password.setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+        password.setId(View.generateViewId());
+        password.setHint("请输入密码");
+        relativeLayout.addView(password);
+
+        final MaterialTextView textView = new MaterialTextView(this);
+        RelativeLayout.LayoutParams layoutParams2 = new RelativeLayout.LayoutParams(MATCH_PARENT,WRAP_CONTENT);
+        layoutParams2.topMargin = 5;
+        layoutParams2.addRule(RelativeLayout.BELOW,password.getId());
+        textView.setGravity(Gravity.CENTER_VERTICAL);
+        textView.setLayoutParams(layoutParams2);
+        textView.setId(View.generateViewId());
+        textView.setTextColor(Color.parseColor("#FF0000"));
+        relativeLayout.addView(textView);
+
+        MaterialButton button = new MaterialButton(this);
+        RelativeLayout.LayoutParams layoutParams3 = new RelativeLayout.LayoutParams(MATCH_PARENT,WRAP_CONTENT);
+        layoutParams3.setMargins(20,50,20,0);
+        layoutParams3.addRule(RelativeLayout.BELOW,password.getId());
+        button.setText("登录");
+        button.setLayoutParams(layoutParams3);
+        relativeLayout.addView(button);
+        return new View[]{username,password,textView,button};
+    }
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public void create38(LinearLayout layout){
+        View[] views = create38View(layout);
+        final EditText username =(EditText) views[0];
+        final EditText password = (EditText) views[1];
+        final MaterialTextView textView = (MaterialTextView) views[2];
+        MaterialButton button =(MaterialButton) views[3];
+        // 布局结束
+        username.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                textView.setText("");
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                textView.setText("");
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String userNmae = username.getText().toString();
+                String passWord = password.getText().toString();
+                String[] u = {"Admin","Administrator","Android"};
+                String[] p = {"123","12345","123456"};
+                int i=0;
+                for(;i<u.length;i++){
+                    if(userNmae.equals(u[i])){
+                        if(passWord.equals(p[i])){
+                            textView.setTextColor(Color.parseColor("#00FF00"));
+                            textView.setText("用户名和密码正确，登录成功！");
+                            return;
+                        }
+                    }
+                }
+                textView.setTextColor(Color.parseColor("#FF0000"));
+                textView.setText("用户名或密码错误，请重新登录！");
+            }
+        });
+    }
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public void create382(LinearLayout layout){
+        View[] views = create38View(layout);
+        final EditText username =(EditText) views[0];
+        final EditText password = (EditText) views[1];
+        MaterialButton button =(MaterialButton) views[3];
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(AutoLayout.this);
+                dialog.setTitle("登录提示信息");
+                dialog.setCancelable(false);
+                dialog.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                String userNmae = username.getText().toString();
+                String passWord = password.getText().toString();
+                String[] u = {"Admin","Administrator","Android"};
+                String[] p = {"123","12345","123456"};
+                int i=0;
+                dialog.setMessage("用户名或密码错误，请重新登录！");
+                for(;i<u.length;i++){
+                    if(userNmae.equals(u[i])){
+                        if(passWord.equals(p[i])){
+                            dialog.setMessage("用户名和密码正确，登录成功！");
+                        }
+                    }
+                }
+                dialog.show();
+            }
+        });
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){

@@ -45,8 +45,9 @@ public class Layout extends AppCompatActivity {
         AddLayoutList("3.6.3","处理ListView单击事件","让列表项响应用户单机事件");
         AddLayoutList("3.7.1","RecyclerView","RecyclerView基本用法");
         AddLayoutList("3.7.2","RecyclerView","自定义RecyclerView列表项布局");
-        AddLayoutList("3.7.3","RecyclerView","RecyclerView布局");
-        AddLayoutList("3.7.4","RecyclerView","处理RecyclerView单机事件");
+        AddLayoutList("3.7.3","RecyclerView","RecyclerView水平布局");
+        AddLayoutList("3.7.3-2","RecyclerView","RecyclerView瀑布流布局");
+        AddLayoutList("3.7.4","RecyclerView","处理RecyclerView单击事件");
         AddLayoutList("3.8","编程实践","用户登录界面设计");
         AddLayoutList("3.8-2","编程实践","3.8用户登录界面设计的对话框版本");
 

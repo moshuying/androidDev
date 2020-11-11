@@ -42,9 +42,11 @@ import androidx.annotation.ArrayRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -129,6 +131,9 @@ public class AutoLayout extends AppCompatActivity{
             case "3.6.3": create363((LinearLayout) createLayout("Linear"));break;
             case "3.7.1": create371((LinearLayout) createLayout("Linear"));break;
             case "3.7.2": create372((LinearLayout) createLayout("Linear"));break;
+            case "3.7.3": create373((LinearLayout) createLayout("Linear"));break;
+            case "3.7.3-2": create3732((LinearLayout) createLayout("Linear"));break;
+            case "3.7.4": create374((LinearLayout) createLayout("Linear"));break;
             case "3.8": create38((LinearLayout) createLayout("Linear"));break;
             case "3.8-2": create382((LinearLayout) createLayout("Linear"));break;
             default:break;
@@ -713,17 +718,230 @@ public class AutoLayout extends AppCompatActivity{
             }
         });
     }
-    public void create372(LinearLayout layout){
-//        class BookAdpater extends RecyclerView.Adpter<BookAdpater.ItemViewHolder>{
-//            private List<Book> bookList;
-//             class ItemViewHolder extends RecyclerView.ViewHolder{
-//                private TextView bookName;
-//                private ImageView bookPic;
-//                public ItemViewHolder(View itemView){
-//                    super(itemView);
-//                }
-//            }
-//        }
+    public RecyclerView create372(final LinearLayout layout){
+        layout.addView(AddMinTitle(intent.getStringExtra("title"),18));
+        class BookAdpater extends RecyclerView.Adapter<BookAdpater.ItemViewHolder>{
+            private List<Book> bookList;
+             class ItemViewHolder extends RecyclerView.ViewHolder{
+                private TextView bookName;
+                private ImageView bookPic;
+                public ItemViewHolder(View itemView){
+                    super(itemView);
+                    bookName = itemView.findViewById(R.id.title);
+                    bookPic = itemView.findViewById(R.id.imageView);
+                }
+            }
+            public BookAdpater(List<Book> bookList){
+                 this.bookList = bookList;
+            }
+            @Override
+            public ItemViewHolder onCreateViewHolder(ViewGroup parent,int viewType){
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.unti3_7_2,parent,false);
+                 return new ItemViewHolder(view);
+            }
+            @Override
+            public void onBindViewHolder(ItemViewHolder holder,int positon){
+                 Book book = bookList.get(positon);
+                 holder.bookName.setText(book.getName());
+                 holder.bookPic.setImageResource(book.getPicId());
+            }
+            @Override
+            public int getItemCount(){
+                 return bookList.size();
+            }
+        }
+        bookList = new ArrayList<Book>();
+        String[] data = {"使用Android Studio环境","Android Studio 实战","Android 编程权威指南"};
+        for(int i=0;i<30;i++){
+            bookList.add(new Book(data[0],R.drawable.ic_chemistry));
+            bookList.add(new Book(data[1],R.drawable.ic_education_forum));
+            bookList.add(new Book(data[2],R.drawable.ic_learning_material));
+        }
+        RecyclerView recyclerView = new RecyclerView(this);
+        layout.addView(recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new BookAdpater(bookList));
+        return recyclerView;
+    }
+    public RecyclerView create373(LinearLayout layout){
+        layout.addView(AddMinTitle(intent.getStringExtra("title"),18));
+        class BookAdpater extends RecyclerView.Adapter<BookAdpater.ItemViewHolder>{
+            private List<Book> bookList;
+            class ItemViewHolder extends RecyclerView.ViewHolder{
+                private TextView bookName;
+                private ImageView bookPic;
+                public ItemViewHolder(View itemView){
+                    super(itemView);
+                    ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(300, ConstraintLayout.LayoutParams.WRAP_CONTENT);
+                    layoutParams.orientation = LinearLayout.VERTICAL;
+                    itemView.setLayoutParams(layoutParams);
+
+                    bookPic = itemView.findViewById(R.id.imageView);
+                    bookName = itemView.findViewById(R.id.title);
+                    ConstraintLayout.LayoutParams layoutParams1 = new ConstraintLayout.LayoutParams( ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
+                    layoutParams1.topToBottom = R.id.imageView;
+                    bookName.setLayoutParams(layoutParams1);
+                    bookName.setGravity(Gravity.CENTER_VERTICAL);
+
+//                    ConstraintLayout.LayoutParams layoutParams1 = new ConstraintLayout.LayoutParams( ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
+                }
+            }
+            public BookAdpater(List<Book> bookList){
+                this.bookList = bookList;
+            }
+            @Override
+            public ItemViewHolder onCreateViewHolder(ViewGroup parent,int viewType){
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.unti3_7_2,parent,false);
+                return new ItemViewHolder(view);
+            }
+            @Override
+            public void onBindViewHolder(ItemViewHolder holder,int positon){
+                Book book = bookList.get(positon);
+                holder.bookName.setText(book.getName());
+                holder.bookPic.setImageResource(book.getPicId());
+            }
+            @Override
+            public int getItemCount(){
+                return bookList.size();
+            }
+        }
+        bookList = new ArrayList<Book>();
+        String[] data = {"使用Android Studio环境","Android Studio 实战","Android 编程权威指南"};
+        for(int i=0;i<30;i++){
+            bookList.add(new Book(data[0],R.drawable.ic_chemistry));
+            bookList.add(new Book(data[1],R.drawable.ic_education_forum));
+            bookList.add(new Book(data[2],R.drawable.ic_learning_material));
+        }
+        RecyclerView recyclerView = new RecyclerView(this);
+        layout.addView(recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        recyclerView.setAdapter(new BookAdpater(bookList));
+        return recyclerView;
+    }
+    public void create3732(LinearLayout layout){
+        layout.addView(AddMinTitle(intent.getStringExtra("title"),18));
+        class BookAdpater extends RecyclerView.Adapter<BookAdpater.ItemViewHolder>{
+            private List<Book> bookList;
+            class ItemViewHolder extends RecyclerView.ViewHolder{
+                private TextView bookName;
+                private ImageView bookPic;
+                public ItemViewHolder(View itemView){
+                    super(itemView);
+                    ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(300, ConstraintLayout.LayoutParams.WRAP_CONTENT);
+                    layoutParams.orientation = LinearLayout.VERTICAL;
+                    itemView.setLayoutParams(layoutParams);
+
+                    bookPic = itemView.findViewById(R.id.imageView);
+                    bookName = itemView.findViewById(R.id.title);
+                    ConstraintLayout.LayoutParams layoutParams1 = new ConstraintLayout.LayoutParams( ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
+                    layoutParams1.topToBottom = R.id.imageView;
+                    bookName.setLayoutParams(layoutParams1);
+                    bookName.setGravity(Gravity.CENTER_VERTICAL);
+
+//                    ConstraintLayout.LayoutParams layoutParams1 = new ConstraintLayout.LayoutParams( ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
+                }
+            }
+            public BookAdpater(List<Book> bookList){
+                this.bookList = bookList;
+            }
+            @Override
+            public ItemViewHolder onCreateViewHolder(ViewGroup parent,int viewType){
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.unti3_7_2,parent,false);
+                return new ItemViewHolder(view);
+            }
+            @Override
+            public void onBindViewHolder(ItemViewHolder holder,int positon){
+                Book book = bookList.get(positon);
+                holder.bookName.setText(book.getName());
+                holder.bookPic.setImageResource(book.getPicId());
+            }
+            @Override
+            public int getItemCount(){
+                return bookList.size();
+            }
+        }
+        bookList = new ArrayList<Book>();
+        String[] data = {"使用Android Studio环境","Android Studio 实战","Android 编程权威指南"};
+        for(int i=0;i<30;i++){
+            bookList.add(new Book(data[0],R.drawable.ic_chemistry));
+            bookList.add(new Book(data[1],R.drawable.ic_education_forum));
+            bookList.add(new Book(data[2],R.drawable.ic_learning_material));
+        }
+        RecyclerView recyclerView = new RecyclerView(this);
+        layout.addView(recyclerView);
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL));
+        recyclerView.setAdapter(new BookAdpater(bookList));
+    }
+    public void create374(LinearLayout layout){
+        layout.addView(AddMinTitle(intent.getStringExtra("title"),18));
+        class BookAdpater extends RecyclerView.Adapter<BookAdpater.ItemViewHolder>{
+            private List<Book> bookList;
+            class ItemViewHolder extends RecyclerView.ViewHolder{
+                private TextView bookName;
+                private ImageView bookPic;
+                public ItemViewHolder(View itemView){
+                    super(itemView);
+                    ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(300, ConstraintLayout.LayoutParams.WRAP_CONTENT);
+                    layoutParams.orientation = LinearLayout.VERTICAL;
+                    itemView.setLayoutParams(layoutParams);
+
+                    bookPic = itemView.findViewById(R.id.imageView);
+                    bookName = itemView.findViewById(R.id.title);
+                    ConstraintLayout.LayoutParams layoutParams1 = new ConstraintLayout.LayoutParams( ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
+                    layoutParams1.topToBottom = R.id.imageView;
+                    bookName.setLayoutParams(layoutParams1);
+                    bookName.setGravity(Gravity.CENTER_VERTICAL);
+
+//                    ConstraintLayout.LayoutParams layoutParams1 = new ConstraintLayout.LayoutParams( ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
+                }
+            }
+            public BookAdpater(List<Book> bookList){
+                this.bookList = bookList;
+            }
+            @Override
+            public ItemViewHolder onCreateViewHolder(ViewGroup parent,int viewType){
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.unti3_7_2,parent,false);
+                final ItemViewHolder itemViewHolder =new ItemViewHolder(view);
+                itemViewHolder.bookPic.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int index = itemViewHolder.getAdapterPosition();
+                        Book book = bookList.get(index);
+                        Toast.makeText(v.getContext(),"你单击了: "+book.getName()+"的图片",Toast.LENGTH_LONG).show();
+                    }
+                });
+                itemViewHolder.bookName.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        int index = itemViewHolder.getAdapterPosition();
+                        Book book = bookList.get(index);
+                        Toast.makeText(v.getContext(),"你单击了: "+book.getName()+"的书名",Toast.LENGTH_LONG).show();
+                    }
+                });
+                return itemViewHolder;
+            }
+            @Override
+            public void onBindViewHolder(ItemViewHolder holder,int positon){
+                Book book = bookList.get(positon);
+                holder.bookName.setText(book.getName());
+                holder.bookPic.setImageResource(book.getPicId());
+            }
+            @Override
+            public int getItemCount(){
+                return bookList.size();
+            }
+        }
+        bookList = new ArrayList<Book>();
+        String[] data = {"使用Android Studio环境","Android Studio 实战","Android 编程权威指南"};
+        for(int i=0;i<30;i++){
+            bookList.add(new Book(data[0],R.drawable.ic_chemistry));
+            bookList.add(new Book(data[1],R.drawable.ic_education_forum));
+            bookList.add(new Book(data[2],R.drawable.ic_learning_material));
+        }
+        RecyclerView recyclerView = new RecyclerView(this);
+        layout.addView(recyclerView);
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL));
+        recyclerView.setAdapter(new BookAdpater(bookList));
     }
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public View[] create38View(LinearLayout layout){

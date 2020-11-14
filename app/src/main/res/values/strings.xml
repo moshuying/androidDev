@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">墨抒颖</string>
+    <string name="app_name">刘九江</string>
     <string name="activity">启动另一个activity</string>
     <string name="myaty">启动MyAty</string>
-    <string name="hello_moshuying_welcome_to_the_main_activity">powerd by moshuying, Welcome visit moshuying.top</string>
+    <string name="hello_liujiujiang_welcome_to_the_main_activity">powerd by liujiujiang, Welcome visit liujiujiang.top</string>
     <string name="intent">隐式启动Intent</string>
     <string name="hideIntent">这是隐式Intent启动的页面</string>
     <string name="AnotherAppActivity">启动QQ中的活动</string>

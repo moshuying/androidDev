@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.moshuying.Unit2.JsonEdit"
+    tools:context="com.example.ui201849057liujiujiang.Unit2.JsonEdit"
     android:isScrollContainer="true">
 
         <EditText
@@ -43,7 +43,7 @@
             android:layout_marginTop="20dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="moshuying"
+            android:text="liujiujiang"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sendJson" />
@@ -91,7 +91,7 @@
             android:layout_marginTop="20dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="moshuying"
+            android:text="liujiujiang"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sendJson" />
@@ -227,7 +227,7 @@
             android:layout_marginTop="15dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="墨抒颖"
+            android:text="刘九江"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sendBundle" />
@@ -300,7 +300,7 @@
             android:layout_marginTop="15dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="moshuying.top"
+            android:text="liujiujiang.top"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sendSerializableObject" />
@@ -354,7 +354,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:autoLink="web"
-            android:text="@string/hello_moshuying_welcome_to_the_main_activity"
+            android:text="@string/hello_liujiujiang_welcome_to_the_main_activity"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:autoLink="web"
-        android:text="使用Android预定义操作 moshuying.top"
+        android:text="使用Android预定义操作 liujiujiang.top"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -124,7 +124,7 @@
         android:layout_marginTop="15dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="墨抒颖"
+        android:text="刘九江"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"

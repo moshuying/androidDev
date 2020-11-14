@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.ui201849057liujiujiang">
+    package="com.example.moshuying">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -17,44 +17,44 @@
         android:roundIcon="@mipmap/logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.ui201849057liujiujiang.UnitChoose" android:label="刘九江的示例APP">
+        <activity android:name="com.example.moshuying.UnitChoose" android:label="刘九江的示例APP">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <!--项目中的所有活动都应该在项目清单文件AndroidManifest.xml文件中声明-->
-        <activity android:name="com.example.ui201849057liujiujiang.MainActivity" />
-        <activity android:name="com.example.ui201849057liujiujiang.Unit1" />
-        <activity android:name="com.example.ui201849057liujiujiang.Unit2.BtnStartAnother" />
-        <activity android:name="com.example.ui201849057liujiujiang.Unit2.MyAty" />
-        <activity android:name="com.example.ui201849057liujiujiang.Unit2.Share" />
-        <activity android:name="com.example.ui201849057liujiujiang.Unit2.PredefinedOperation" />
-        <activity android:name="com.example.ui201849057liujiujiang.Unit2.JsonEdit" />
-        <activity android:name="com.example.ui201849057liujiujiang.Unit2.Auto" android:theme="@style/Theme.MaterialComponents.Dialog"/>
-        <activity android:name="com.example.ui201849057liujiujiang.Unit2.StartupMode" />
-        <activity android:name="com.example.ui201849057liujiujiang.Unit2.startupMode.SingleTop" android:launchMode="singleTop"/>
-        <activity android:name="com.example.ui201849057liujiujiang.Unit2.startupMode.SingleTask" android:launchMode="singleTask"/>
-        <activity android:name="com.example.ui201849057liujiujiang.Unit2.startupMode.SingleTaskB" android:launchMode="standard"/>
-        <activity android:name="com.example.ui201849057liujiujiang.Unit2.startupMode.SingleInstance" android:launchMode="singleInstance"/>
-        <activity android:name="com.example.ui201849057liujiujiang.Unit2.startupMode.SingleInstanceB" android:launchMode="standard"/>
-        <activity android:name="com.example.ui201849057liujiujiang.Unit2.GetUserInput" />
+        <activity android:name="com.example.moshuying.MainActivity" />
+        <activity android:name="com.example.moshuying.Unit1" />
+        <activity android:name="com.example.moshuying.Unit2.BtnStartAnother" />
+        <activity android:name="com.example.moshuying.Unit2.MyAty" />
+        <activity android:name="com.example.moshuying.Unit2.Share" />
+        <activity android:name="com.example.moshuying.Unit2.PredefinedOperation" />
+        <activity android:name="com.example.moshuying.Unit2.JsonEdit" />
+        <activity android:name="com.example.moshuying.Unit2.Auto" android:theme="@style/Theme.MaterialComponents.Dialog"/>
+        <activity android:name="com.example.moshuying.Unit2.StartupMode" />
+        <activity android:name="com.example.moshuying.Unit2.startupMode.SingleTop" android:launchMode="singleTop"/>
+        <activity android:name="com.example.moshuying.Unit2.startupMode.SingleTask" android:launchMode="singleTask"/>
+        <activity android:name="com.example.moshuying.Unit2.startupMode.SingleTaskB" android:launchMode="standard"/>
+        <activity android:name="com.example.moshuying.Unit2.startupMode.SingleInstance" android:launchMode="singleInstance"/>
+        <activity android:name="com.example.moshuying.Unit2.startupMode.SingleInstanceB" android:launchMode="standard"/>
+        <activity android:name="com.example.moshuying.Unit2.GetUserInput" />
 <!--        第三章-->
-        <activity android:name="com.example.ui201849057liujiujiang.Unit2.UserInterfaceDesign" />
-        <activity android:name="com.example.ui201849057liujiujiang.Unit3.Layout" />
-        <activity android:name="com.example.ui201849057liujiujiang.Unit3.AutoLayout" />
+        <activity android:name="com.example.moshuying.Unit2.UserInterfaceDesign" />
+        <activity android:name="com.example.moshuying.Unit3.Layout" />
+        <activity android:name="com.example.moshuying.Unit3.AutoLayout" />
 <!--        第四章-->
-        <activity android:name="com.example.ui201849057liujiujiang.Unit4.Layout" android:theme="@style/FullScreenAppTheme"/>
-        <activity android:name="com.example.ui201849057liujiujiang.Unit4.AutoLayout" android:theme="@style/FullScreenAppTheme"/>
+        <activity android:name="com.example.moshuying.Unit4.Layout" android:theme="@style/FullScreenAppTheme"/>
+        <activity android:name="com.example.moshuying.Unit4.AutoLayout" android:theme="@style/FullScreenAppTheme"/>
         <!--在AndroidManifest.xml中声明活动时候,在其Intent过滤器中可使用任意字符串作为活动的操作名称。-->
-        <activity android:name="com.example.ui201849057liujiujiang.Unit2.HideIntent">
+        <activity android:name="com.example.moshuying.Unit2.HideIntent">
             <intent-filter>
                 <action android:name="toStartAnotherActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.ui201849057liujiujiang.Unit2.InternetActivity"
+            android:name="com.example.moshuying.Unit2.InternetActivity"
             android:label="从链接启动刘九江的示例APP">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -65,7 +65,7 @@
         </activity>
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.ui201849057liujiujiang.fileprovider"
+            android:authorities="com.example.moshuying.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

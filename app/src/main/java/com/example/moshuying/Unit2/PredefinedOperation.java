@@ -24,7 +24,7 @@ public class PredefinedOperation extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 EditText text = (EditText) findViewById(R.id.text);
                 EditText time = (EditText) findViewById(R.id.time);
-                intent.setData(Uri.parse("https://threelib.liujiujiang.top/assets/AndroidActive.html?time="+time.getText()+"&title=跳转到刘九江家&text="+text.getText()));
+                intent.setData(Uri.parse("https://threelib.liujiujiang.top/assets/AndroidActive.html?time="+time.getText()+"&title=跳转到墨抒颖家&text="+text.getText()));
                 startActivity(intent);
             }
         });

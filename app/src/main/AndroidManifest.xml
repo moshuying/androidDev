@@ -17,7 +17,7 @@
         android:roundIcon="@mipmap/logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.moshuying.UnitChoose" android:label="刘九江的示例APP">
+        <activity android:name="com.example.moshuying.UnitChoose" android:label="墨抒颖的示例APP">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -55,7 +55,7 @@
         </activity>
         <activity
             android:name="com.example.moshuying.Unit2.InternetActivity"
-            android:label="从链接启动刘九江的示例APP">
+            android:label="从链接启动墨抒颖的示例APP">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />

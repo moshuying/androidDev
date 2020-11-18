@@ -31,13 +31,15 @@ public class AutoLayout extends AppCompatActivity{
         String unit = intent.getStringExtra("unit");
         assert unit != null;
         switch (unit){
-            case "4.2.1": create421();break;
-
+            case "4.4": create44();break;
             default:break;
         }
     }
-    public void create421(){
+    public void create44(){
         layout.addView(AddMinTitle(intent.getStringExtra("title"),18));
+        MaterialTextView materialTextView = new MaterialTextView(this);
+        materialTextView.setText("这是开机启动的app");
+        layout.addView(materialTextView);
     }
     public TextView AddMinTitle(String title,int size){
         MaterialTextView textView = new MaterialTextView(this);

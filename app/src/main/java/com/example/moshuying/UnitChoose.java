@@ -68,6 +68,13 @@ public class UnitChoose extends AppCompatActivity {
             }
         }));
 
+        layoutLists.add(new LayoutList("六单元", "多媒体", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(UnitChoose.this, com.example.moshuying.Unit6.Layout.class));
+            }
+        }));
+
         RecyclerView recyclerView = new RecyclerView(this);
         recyclerView.setAdapter(new LayoutAdapter(layoutLists));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

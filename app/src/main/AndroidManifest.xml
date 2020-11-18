@@ -16,6 +16,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/logo_round"
         android:supportsRtl="true"
+        android:requestLegacyExternalStorage="true"
         android:theme="@style/AppTheme">
 
         <activity
@@ -91,6 +92,9 @@
         <!-- 第五章 -->
         <activity android:name=".Unit5.Layout" />
         <activity android:name=".Unit5.AutoLayout" />
+        <!-- 第六章 -->
+        <activity android:name=".Unit6.Layout" />
+        <activity android:name=".Unit6.AutoLayout" />
         <!-- 在AndroidManifest.xml中声明活动时候,在其Intent过滤器中可使用任意字符串作为活动的操作名称。 -->
 
 

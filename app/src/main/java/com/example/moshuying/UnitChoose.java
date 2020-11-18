@@ -61,6 +61,12 @@ public class UnitChoose extends AppCompatActivity {
                 startActivity(new Intent(UnitChoose.this, com.example.moshuying.Unit4.Layout.class));
             }
         }));
+        layoutLists.add(new LayoutList("五单元", "数据存储", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(UnitChoose.this, com.example.moshuying.Unit5.Layout.class));
+            }
+        }));
 
         RecyclerView recyclerView = new RecyclerView(this);
         recyclerView.setAdapter(new LayoutAdapter(layoutLists));

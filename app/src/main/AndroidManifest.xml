@@ -88,6 +88,9 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+        <!-- 第五章 -->
+        <activity android:name=".Unit5.Layout" />
+        <activity android:name=".Unit5.AutoLayout" />
         <!-- 在AndroidManifest.xml中声明活动时候,在其Intent过滤器中可使用任意字符串作为活动的操作名称。 -->
 
 

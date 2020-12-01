@@ -95,6 +95,12 @@
         <!-- 第六章 -->
         <activity android:name=".Unit6.Layout" />
         <activity android:name=".Unit6.AutoLayout" />
+        <!-- 第七章 -->
+        <activity android:name=".Unit7.Layout" />
+        <activity android:name=".Unit7.AutoLayout" />
+        <!-- 第八章 -->
+        <activity android:name=".Unit8.Layout" />
+        <activity android:name=".Unit8.AutoLayout" />
         <!-- 在AndroidManifest.xml中声明活动时候,在其Intent过滤器中可使用任意字符串作为活动的操作名称。 -->
 
 

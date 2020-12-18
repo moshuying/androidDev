@@ -1,6 +1,7 @@
 package com.example.moshuying.Unit5;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,8 +11,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.telephony.emergency.EmergencyNumber;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,13 +23,14 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
 
 import com.example.moshuying.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
 
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,8 +38,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class AutoLayout extends AppCompatActivity{
@@ -63,6 +66,7 @@ public class AutoLayout extends AppCompatActivity{
             case "5.1.3": create513();break;
             case "5.1.4": create514();break;
             case "5.2.3": create523(layout);break;
+            case "5.3": create53();break;
             case "5.4": create54(layout);break;
             default:break;
         }
@@ -77,12 +81,12 @@ public class AutoLayout extends AppCompatActivity{
         // 检测存储卡是否可读
         private boolean isReadable(){
             String state = Environment.getExternalStorageState();
-            return state.equals(Environment.MEDIA_MOUNTED) || state.equals(Environment.MEDIA_MOUNTED_READ_ONLY);
+            return !state.equals(Environment.MEDIA_MOUNTED) && !state.equals(Environment.MEDIA_MOUNTED_READ_ONLY);
         }
         //检测存储卡是否可写
         private boolean isWriteable(){
             String state = Environment.getExternalStorageState();
-            return state.equals(Environment.MEDIA_MOUNTED) || state.equals(Environment.MEDIA_MOUNTED_READ_ONLY);
+            return !state.equals(Environment.MEDIA_MOUNTED) && !state.equals(Environment.MEDIA_MOUNTED_READ_ONLY);
         }
         private TextInputEditText f_name;
         private EditText f_data;
@@ -149,27 +153,31 @@ public class AutoLayout extends AppCompatActivity{
         private void handle(String rw){
             switch (TYPE){
                 case SD_CARD:sdcard(rw);break;
-                case PRIVATE_FILE:privatefile(rw);break;
-                case APP_DIR:appdir(rw);break;
-                case PUBLIC_DIR:publicdir(rw);break;
+                case PRIVATE_FILE:
+                    privateFile(rw);break;
+                case APP_DIR:
+                    appDir(rw);break;
+                case PUBLIC_DIR:
+                    publicDir(rw);break;
                 default:break;
             }
         }
-        private void appdir(String rw){
+        private void appDir(String rw){
             dir=null;
             mf =null;
             rwHandle(rw);
         }
+        @SuppressLint("SetTextI18n")
         private void sdcard(String rw){
             dir = Environment.getExternalStorageDirectory();
-            mf = new File(dir,f_name.getText().toString());
+            mf = new File(dir, Objects.requireNonNull(f_name.getText()).toString());
             if(rw.equals("w")){
-                if(!isWriteable()){
+                if(isWriteable()){
                     show.setText("SD卡不可用");
                     return;
                 }
             }else {
-                if(!isReadable()){
+                if(isReadable()){
                     show.setText("SD卡不可读");
                     return;
                 }
@@ -177,22 +185,23 @@ public class AutoLayout extends AppCompatActivity{
             rwHandle(rw);
         }
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-        private void privatefile(String rw){
+        private void privateFile(String rw){
             dir = getExternalFilesDir(null);
             mf = new File(dir, Objects.requireNonNull(f_name.getText()).toString());
             rwHandle(rw);
         }
+        @SuppressLint("SetTextI18n")
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-        private void publicdir(String rw){
+        private void publicDir(String rw){
             dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
             mf = new File(dir, Objects.requireNonNull(f_name.getText()).toString());
             if(rw.equals("w")){
-                if(!isWriteable()){
+                if(isWriteable()){
                     show.setText("SD卡不可用");
                     return;
                 }
             }else {
-                if(!isReadable()){
+                if(isReadable()){
                     show.setText("SD卡不可读");
                     return;
                 }
@@ -317,6 +326,7 @@ public class AutoLayout extends AppCompatActivity{
             Toast.makeText(AutoLayout.this,"登录成功！",Toast.LENGTH_SHORT).show();
         });
     }
+    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public EditText makeLineLinearLayout(LinearLayout layout, String title){
         LinearLayout line = new LinearLayout(this);
@@ -337,6 +347,147 @@ public class AutoLayout extends AppCompatActivity{
         layout.addView(line);
 //        editText.setId(View.generateViewId());
         return editText;
+    }
+    private void create53(){
+        class  MySqlLiteHelper extends SQLiteOpenHelper{
+            private  String CREEATE_TABLE_USER="create table users(id  integer primary key autoincrement,userid text,password text)";
+            private Context sContext;
+            private String CREATE_TABLE_TYPE="create table types(id integer primary key autoincrement,type_code,describe text)";
+            public MySqlLiteHelper(Context context,String name,SQLiteDatabase.CursorFactory factory,int version){
+                super(context,name,factory,version);
+                sContext=context;
+            }
+            @Override
+            public void onCreate(SQLiteDatabase db) {
+                db.execSQL(CREEATE_TABLE_USER);
+                db.execSQL(CREATE_TABLE_TYPE);
+                Toast.makeText(sContext,"成功创建数据表",Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+                db.execSQL("drop table if exists users");
+                db.execSQL("drop table if exists types");
+                onCreate(db);
+            }
+
+            @Override
+            public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+                db.setVersion(oldVersion);
+            }
+        }
+        final MySqlLiteHelper[] mySqlLiteHelper = new MySqlLiteHelper[1];
+        final SQLiteDatabase[] myDb = new SQLiteDatabase[1];
+        MaterialTextView textView = createTextView("");
+        createButton("创建数据库").setOnClickListener(v -> {
+            mySqlLiteHelper[0] = new MySqlLiteHelper(AutoLayout.this,"userDb.db",null,1);
+            myDb[0] = mySqlLiteHelper[0].getWritableDatabase();//完成创建数据库
+            textView.setText("数据库："+ myDb[0].getPath());//显示数据库文件机器路径
+        });
+        layout.addView(textView);
+        createButton("删除数据库").setOnClickListener(v -> {
+            if(myDb[0].isOpen()){
+                myDb[0].close();
+            }
+            String path = myDb[0].getPath();//获取数据库文件名 包含路径
+            File db = new File(path);
+            SQLiteDatabase.deleteDatabase(db);//删除数据库
+            textView.setText("数据库已删除");
+        });
+
+        createButton("升级数据库").setOnClickListener(v->{
+            mySqlLiteHelper[0]=new MySqlLiteHelper(AutoLayout.this,"userDb.db",null,2);
+            myDb[0]=mySqlLiteHelper[0].getWritableDatabase();//完成数据库升级
+            textView.setText("数据库升级成功");
+        });
+
+        EditText id  = createEditText("输入用户ID");
+        EditText password  = createEditText("输入登陆密码");
+
+        ListView listView = new ListView(this);
+        createButton("添加记录").setOnClickListener(v -> {
+            if(myDb[0]==null){
+                return;
+            }
+            ContentValues cv = new ContentValues();
+            String strId = id.getText().toString();
+            String pwd = password.getText().toString();
+            cv.put("userid",strId);
+            cv.put("password",pwd);
+            myDb[0].insert("users",null,cv);//添加数据
+            Toast.makeText(AutoLayout.this,"成功添加记录",Toast.LENGTH_LONG).show();
+            refreshList(listView,myDb[0]);
+        });
+        createButton("修改数据(根据id更新密码)").setOnClickListener(v->{
+            if(myDb[0]==null){
+                return;
+            }
+            ContentValues cv = new ContentValues();
+            String strId = id.getText().toString();
+            String pwd = password.getText().toString();
+            cv.put("password",pwd);
+            myDb[0].update("users",cv,"userid=?",new String[]{strId});//更新数据
+            Toast.makeText(AutoLayout.this,"成功修改记录",Toast.LENGTH_LONG).show();
+            refreshList(listView,myDb[0]);
+        });
+        createButton("删除数据(根据id删除)").setOnClickListener(v->{
+            if(myDb[0]==null){
+                return;
+            }
+            String strId = id.getText().toString();
+            myDb[0].delete("users","userid=?",new String[]{strId});//删除数据
+            Toast.makeText(AutoLayout.this,"成功删除记录",Toast.LENGTH_LONG).show();
+            refreshList(listView,myDb[0]);
+        });
+        createButton("使用toast提示展示数据库所有数据").setOnClickListener(v -> {
+            if(myDb[0]==null){
+                return;
+            }
+            Cursor c = myDb[0].query("users",null,null,null,null,null,null);
+            String msg = "当前记录如下:\n";
+            if(c.moveToFirst()){
+                do{
+                    msg = msg+"userid:"+c.getString(c.getColumnIndex("userid"))+" password="+c.getString(c.getColumnIndex("password"))+"\n";
+                }while (c.moveToNext());
+            }
+            Toast.makeText(AutoLayout.this,msg,Toast.LENGTH_LONG).show();
+            Log.e("toast",msg);
+
+//            @SuppressLint("HandlerLeak") Handler mHandler = new Handler() {
+//                public void dispatchMessage(android.os.Message msg) {
+//                    if (msg.what == 1) {
+//                        Toast.makeText(AutoLayout.this, "这是一个toast", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            };
+//            new Thread(() -> mHandler.sendEmptyMessage(1)).start();
+        });
+        layout.addView(listView);
+    }
+    private MaterialButton createButton(String text){
+        MaterialButton button = new MaterialButton(this);
+        button.setText(text);
+        button.setLayoutParams(new LinearLayout.LayoutParams(MATCH_PARENT,WRAP_CONTENT));
+        layout.addView(button);
+        return button;
+    }
+    private MaterialTextView createTextView(String text){
+        MaterialTextView textView = new MaterialTextView(this);
+        textView.setText(text);
+        return textView;
+    }
+    private EditText createEditText(String hint){
+        EditText editText = new EditText(this);
+        editText.setHint(hint);
+        editText.setLayoutParams(new LinearLayout.LayoutParams(MATCH_PARENT,WRAP_CONTENT));
+        layout.addView(editText);
+        return editText;
+    }
+    private void refreshList(ListView listView,SQLiteDatabase myDb){
+        Cursor c = myDb.query("users",new String[]{"id as _id","userid","password"},null,null,null,null,null);
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(AutoLayout.this,R.layout.simple_database_list,c,new String[]{"userid","password"},new int[]{R.id.textID,R.id.textPwd});
+        listView.setAdapter(adapter);
+
     }
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public void create54(LinearLayout layout){
@@ -367,7 +518,7 @@ public class AutoLayout extends AppCompatActivity{
             String id = username.getText().toString();
             String pwd = password.getText().toString();
 //                    Cursor c = myDb.rawQuery("select * from users where userid=? and password=?",new String[]{id,pwd});
-            Cursor c = myDb.query("users",new String[]{"userid"},"userid=? and password=?",new String[]{id,pwd},null,null,null);
+            @SuppressLint("Recycle") Cursor c = myDb.query("users",new String[]{"userid"},"userid=? and password=?",new String[]{id,pwd},null,null,null);
             if(!c.moveToFirst()){// 登录信息错误
                 Toast.makeText(AutoLayout.this,"用户名或密码错误！",Toast.LENGTH_SHORT).show();
                 return;

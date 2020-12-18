@@ -35,6 +35,7 @@ public class Layout extends AppCompatActivity {
         AddLayoutList("5.1.3","应用的私有文件","[改编自书5.1.1示例]");
         AddLayoutList("5.1.4","访问公共目录","[改编自书5.1.1示例]");
         AddLayoutList("5.2.3","实现记住密码功能","避免用户下一次登陆时再次输入登录信息");
+        AddLayoutList("5.3","5.3.1~5.3.7  SqlLite数据库存储","轻量的关系数据库的使用");
         AddLayoutList("5.4","编程实践：基于数据库的登录验证","基于数据库sqlite的登录验证");
 
         RecyclerView recyclerView = findViewById(R.id.unit3_recyclerview);

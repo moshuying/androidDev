@@ -5,9 +5,9 @@
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="testRunner" value="PLATFORM" />
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="D:/software/gradle-6.7-bin/gradle-6.7" />
+        <option name="gradleHome" value="/Library/Dev/gradle-6.7.1" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
@@ -16,7 +16,6 @@
         </option>
         <option name="resolveExternalAnnotations" value="false" />
         <option name="resolveModulePerSourceSet" value="false" />
-        <option name="useQualifiedModuleNames" value="true" />
       </GradleProjectSettings>
     </option>
   </component>

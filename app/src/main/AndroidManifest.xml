@@ -14,10 +14,18 @@
         android:allowBackup="true"
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/logo_round"
         android:supportsRtl="true"
-        android:requestLegacyExternalStorage="true"
         android:theme="@style/AppTheme">
+        <receiver
+            android:name=".Unit4.receiver.StopReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+        <receiver
+            android:name=".Unit4.receiver.MyReceiver422"
+            android:enabled="true"
+            android:exported="true" />
 
         <activity
             android:name=".UnitChoose"
@@ -27,12 +35,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <!-- 项目中的所有活动都应该在项目清单文件AndroidManifest.xml文件中声明 -->
+        </activity> <!-- 项目中的所有活动都应该在项目清单文件AndroidManifest.xml文件中声明 -->
         <activity android:name=".MainActivity" />
         <activity android:name=".Unit2.HideIntent">
             <intent-filter>
                 <action android:name="toStartAnotherActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -41,8 +49,10 @@
             android:label="从链接启动墨抒颖的示例APP">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data
                     android:host="example.app"
                     android:scheme="https" />
@@ -74,13 +84,16 @@
             android:name=".Unit2.startupMode.SingleInstanceB"
             android:launchMode="standard" />
         <activity android:name=".Unit2.GetUserInput" />
-        <activity android:name=".Unit2.UserInterfaceDesign" />
-        <!-- 第三章 -->
+        <activity android:name=".Unit2.UserInterfaceDesign" /> <!-- 第三章 -->
         <activity android:name=".Unit3.Layout" />
-        <activity android:name=".Unit3.AutoLayout" />
-        <!-- 第四章 -->
+        <activity android:name=".Unit3.AutoLayout" /> <!-- 第四章 -->
         <activity android:name=".Unit4.Layout" />
         <activity android:name=".Unit4.AutoLayout" />
+
+        <receiver
+            android:name=".Unit4.receiver.MyReceiver421"
+            android:enabled="true"
+            android:exported="true" />
         <receiver
             android:name=".Unit4.BootReceiver"
             android:enabled="true"
@@ -89,21 +102,32 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <!-- 第五章 -->
+        <receiver
+            android:name=".Unit4.receiver.SysReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.net.wifi.Wi-Fi_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".Unit4.receiver.MyReceiver431">
+            <intent-filter android:priority="3">
+                <action android:name="com.example.moshuying.ACTION" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".Unit4.receiver.MyReceiver432">
+            <intent-filter android:priority="4">
+                <action android:name="com.example.moshuying.ACTION" />
+            </intent-filter>
+        </receiver> <!-- 第五章 -->
         <activity android:name=".Unit5.Layout" />
-        <activity android:name=".Unit5.AutoLayout" />
-        <!-- 第六章 -->
+        <activity android:name=".Unit5.AutoLayout" /> <!-- 第六章 -->
         <activity android:name=".Unit6.Layout" />
-        <activity android:name=".Unit6.AutoLayout" />
-        <!-- 第七章 -->
+        <activity android:name=".Unit6.AutoLayout" /> <!-- 第七章 -->
         <activity android:name=".Unit7.Layout" />
-        <activity android:name=".Unit7.AutoLayout" />
-        <!-- 第八章 -->
+        <activity android:name=".Unit7.AutoLayout" /> <!-- 第八章 -->
         <activity android:name=".Unit8.Layout" />
-        <activity android:name=".Unit8.AutoLayout" />
-        <!-- 在AndroidManifest.xml中声明活动时候,在其Intent过滤器中可使用任意字符串作为活动的操作名称。 -->
-
-
+        <activity android:name=".Unit8.AutoLayout" /> <!-- 在AndroidManifest.xml中声明活动时候,在其Intent过滤器中可使用任意字符串作为活动的操作名称。 -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.moshuying.fileprovider"

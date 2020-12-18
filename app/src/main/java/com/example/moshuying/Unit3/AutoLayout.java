@@ -465,14 +465,6 @@ public class AutoLayout extends AppCompatActivity{
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-//                Notification notification = new NotificationCompat.Builder(AutoLayout.this)
-//                        .setSmallIcon(R.mipmap.logo)
-//                        .setContentTitle("(｡･∀･)ﾉﾞ嗨 你有一个新消息！")
-//                        .setContentText("你已经学会了创建Notification 了")
-//                        .setAutoCancel(true).build();
-//                NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-//                notificationManager.notify(1,notification);
-
                 String id ="channel_1";//channel的id
                 String description = "123";//channel的描述信息
                 int importance = NotificationManager.IMPORTANCE_LOW;//channel的重要性

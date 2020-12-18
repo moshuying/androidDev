@@ -95,19 +95,19 @@ public class AutoLayout extends AppCompatActivity{
         MaterialTextView textView = new MaterialTextView(this);
         layout.addView(textView);
     }
-    private LocalBroadcastManager localBroadcastManager = null;
-    private MyReceiverLocal localReceiver = null;
+//    private LocalBroadcastManager localBroadcastManager = null;
+//    private MyReceiverLocal localReceiver = null;
     private void create424(){
         AutoAddTitle();
-        IntentFilter intentFilter = new IntentFilter("MyLocalBroadcastReceiver");
-        localBroadcastManager = LocalBroadcastManager.getInstance(AutoLayout.this);
-        localReceiver = new MyReceiverLocal();//创建广播接收器
-        localBroadcastManager.registerReceiver(localReceiver,intentFilter);//注册本地广播接收器
+//        IntentFilter intentFilter = new IntentFilter("MyLocalBroadcastReceiver");
+//        localBroadcastManager = LocalBroadcastManager.getInstance(AutoLayout.this);
+//        localReceiver = new MyReceiverLocal();//创建广播接收器
+//        localBroadcastManager.registerReceiver(localReceiver,intentFilter);//注册本地广播接收器
 
         MaterialButton materialButton = new MaterialButton(AutoLayout.this);
         materialButton.setText("发送广播消息");
         materialButton.setOnClickListener(v->{
-            localBroadcastManager.sendBroadcast(new Intent("MyLocalBroadcastReceiver"));//用注册的操作创建Intent
+//            localBroadcastManager.sendBroadcast(new Intent("MyLocalBroadcastReceiver"));//用注册的操作创建Intent
         });
         layout.addView(materialButton);
     }
@@ -137,7 +137,7 @@ public class AutoLayout extends AppCompatActivity{
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        localBroadcastManager.unregisterReceiver(localReceiver);//注销本地广播接收器
+//        localBroadcastManager.unregisterReceiver(localReceiver);//注销本地广播接收器
     }
 
     @SuppressLint("SetTextI18n")

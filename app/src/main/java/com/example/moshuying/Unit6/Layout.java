@@ -30,6 +30,7 @@ public class Layout extends AppCompatActivity {
         super.onCreate(state);
         setContentView(R.layout.unit3_layout);
 
+        AddLayoutList("6.1.3","使用MediaPlayer播放视频","简单实现视频播放");
         AddLayoutList("6.4","编程实践：自定义音乐播放器","实现一个音乐播放器");
 
         RecyclerView recyclerView = findViewById(R.id.unit3_recyclerview);

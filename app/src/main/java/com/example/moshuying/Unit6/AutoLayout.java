@@ -1,16 +1,20 @@
 package com.example.moshuying.Unit6;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.media.MediaScannerConnection;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.Gravity;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -26,6 +30,7 @@ import androidx.core.content.ContextCompat;
 import com.example.moshuying.R;
 import com.example.moshuying.Unit6.SongLib.Song;
 import com.example.moshuying.Unit6.SongLib.SongAdapter;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
 import android.widget.ListView;
@@ -34,6 +39,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -47,12 +53,13 @@ public class AutoLayout extends AppCompatActivity{
     private ArrayList<Song> listSong;
     private TextView tvLen,tvMusicName;
     private SeekBar sbSeek;
+    private LinearLayout layout;
     @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
     public void onCreate(Bundle state){
         super.onCreate(state);
         setContentView(R.layout.auto);
-        LinearLayout layout = findViewById(R.id.auto_list_item);
+        layout = findViewById(R.id.auto_list_item);
         ViewGroup.LayoutParams layoutParams = layout.getLayoutParams();
         layoutParams.height = MATCH_PARENT;
         layout.setLayoutParams(layoutParams);
@@ -62,8 +69,84 @@ public class AutoLayout extends AppCompatActivity{
         assert unit != null;
         switch (unit){
             case "6.4": create64(layout);break;
+            case "6.1.3": create613();break;
             default:break;
         }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void create613(){
+        // MediaPlyer既可用于播放音频，也可用于播放视频，在用法上没有多大的区别，只是在播放视频时应使用SurfaceView控件
+        AutoAddTitle();
+        MaterialTextView textView = new MaterialTextView(this);
+        textView.setText("视频不出来可能是没网或者链接失效，可以自行到源码中修改视频链接地址。也可以去github提个issue");
+        layout.addView(textView);
+        MediaPlayer mediaPlayer = new MediaPlayer();// 创建MediaPlayer对象
+        // 动态鉴权
+        if(ContextCompat.checkSelfPermission(this,Manifest.permission.READ_EXTERNAL_STORAGE)!=PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
+        }else {
+            new Thread(() -> {
+                try {
+                    mediaPlayer.setDataSource(AutoLayout.this, Uri.parse("http://exampleapp.moshuying.top/exampleApp/resource/mengnanban_xinbaodao.mp4"));
+                    mediaPlayer.prepare();
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+            }).start();
+        }
+
+        SurfaceView surfaceView = new SurfaceView(this);
+        LinearLayout.LayoutParams surfaceViewLayoutParams = new LinearLayout.LayoutParams(MATCH_PARENT,WRAP_CONTENT);
+        surfaceViewLayoutParams.weight = 1;
+        surfaceView.setLayoutParams(surfaceViewLayoutParams);
+
+        SurfaceHolder holder = surfaceView.getHolder();
+        SurfaceHolder.Callback surfaceHolderCallback = new SurfaceHolder.Callback() {
+            @Override
+            public void surfaceCreated(@NonNull SurfaceHolder holder) {
+                mediaPlayer.setDisplay(holder);
+            }
+
+            @Override
+            public void surfaceChanged(@NonNull SurfaceHolder holder, int format, int width, int height) {
+
+            }
+
+            @Override
+            public void surfaceDestroyed(@NonNull SurfaceHolder holder) {
+
+            }
+        };
+        holder.addCallback(surfaceHolderCallback);
+
+        LinearLayout  videoControl = new LinearLayout(this);
+
+        videoControl.addView(createButton("播放视频",v->{
+            mediaPlayer.start();
+        }));
+        videoControl.addView(createButton("暂停视频",v->{mediaPlayer.pause();}));
+        videoControl.addView(createButton("停止视频",v->{
+            mediaPlayer.stop();
+            try {
+                mediaPlayer.prepare();
+            }catch (IOException e ){
+                e.printStackTrace();
+            }
+        }));
+
+        layout.addView(videoControl);
+        layout.addView(surfaceView);
+    }
+
+    private MaterialButton createButton(String text,View.OnClickListener l){
+        MaterialButton button = new MaterialButton(this);
+        button.setText(text);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(WRAP_CONTENT,WRAP_CONTENT);
+        layoutParams.weight = 1;
+        button.setLayoutParams(layoutParams);
+        button.setOnClickListener(l);
+        return button;
     }
     @RequiresApi(api = Build.VERSION_CODES.Q)
     public void create64(LinearLayout layout){
@@ -216,5 +299,8 @@ public class AutoLayout extends AppCompatActivity{
         textView.setGravity(Gravity.CENTER);
         textView.setLayoutParams(layoutParams);
         return textView;
+    }
+    private void AutoAddTitle(){
+        layout.addView(AddMinTitle(intent.getStringExtra("title"),18));
     }
 }

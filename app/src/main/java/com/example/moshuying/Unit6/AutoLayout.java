@@ -51,7 +51,7 @@ public class AutoLayout extends AppCompatActivity{
     private boolean seekBarChange;
     private MediaPlayer mediaPlayer = null;
     private ArrayList<Song> listSong;
-    private TextView tvLen,tvMusicName;
+    private TextView tvLen,tvMusicName; 
     private SeekBar sbSeek;
     private LinearLayout layout;
     @RequiresApi(api = Build.VERSION_CODES.Q)

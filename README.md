@@ -10,8 +10,8 @@
 [git仓库](https://github.com/moshuying/androidDev.git)
 
 相关文章
-[Java http请求及常见数据交互格式处理](https://moshuying.top/2020/10/09/android-http-request/)
-[Android 文件分享](https://moshuying.top/2020/10/03/android-document-sharing/)
+[Java http请求及常见数据交互格式处理](https://www.msy.plus/2020/10/03/reading-book-android/)
+[Android 文件分享](https://www.msy.plus/2020/10/03/reading-book-android/)
 
 # 最终效果
 <!-- more -->
